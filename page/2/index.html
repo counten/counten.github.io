@@ -156,196 +156,83 @@
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/jcf-arrayList/">jcf-arrayList</a>
+        <a href="/2019/12/12/spring-aop/">spring-aop</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年12月12日</p>
       
         
-  <a href="/tags#jcf" >
-    <span class="tag-code">jcf</span>
+  <a href="/tags#javaEE" >
+    <span class="tag-code">javaEE</span>
+  </a>
+
+  <a href="/tags#spring" >
+    <span class="tag-code">spring</span>
   </a>
 
       
       <div class="article-summary">
         
-          1. Important Variables12345678// 用数组来存储元素transient Object[] elementData;// 默认容量为10；private static final int DEFAULT_CAPACITY = 10;// 存储元素的数量；priva ...
+          AOP基于Java的动态代理特性实现，详见 designPattern_Proxy
+1. Basic Concept
+Advice: 通知（切面），定义在连接点做什么，为切面增强提供织入接口。具体的类型有 BeforeAdvice、AfterAdvice、ThrowsAdvice；
+Poin ...
         
       </div>
-      <a class="more" href="/2020/09/23/jcf-arrayList/">Read more</a>
+      <a class="more" href="/2019/12/12/spring-aop/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/jcf-linkedList/">jcf-linkedList</a>
+        <a href="/2019/12/10/design-pattern/">design-pattern</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年12月10日</p>
       
         
-  <a href="/tags#jcf" >
-    <span class="tag-code">jcf</span>
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
   </a>
 
       
       <div class="article-summary">
         
-          1. Important Variables12345transient int size = 0;// 头节点指针transient Node&lt;E&gt; first;// 尾节点指针transient Node&lt;E&gt; last;
-12345678910private s ...
+          DesignPattern系列文章参考https://www.bilibili.com/video/av24176315/?p=1 李建中讲的 C++ 设计模式，结合自己的学习心得。
+如何解决复杂性问题
+分解：分而治之
+抽象：忽略他的非本质细节，而去处理泛化和理想化了的对象模型面向对象
+重新 ...
         
       </div>
-      <a class="more" href="/2020/09/23/jcf-linkedList/">Read more</a>
+      <a class="more" href="/2019/12/10/design-pattern/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/jcf-privorityQueue/">jcf-privorityQueue</a>
+        <a href="/2019/11/24/Adapter-pattern/">Adapter-pattern</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年11月24日</p>
       
         
-  <a href="/tags#jcf" >
-    <span class="tag-code">jcf</span>
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
   </a>
 
       
       <div class="article-summary">
         
-          基于优先堆实现的无限的优先队列。队列里的元素根据它们自然的顺序或者构造函数传入的Comparator排序。PriorityQueue不允许null元素，依赖于自然顺序的优先队列也不允许无法比较的对象。
+          
+动机  软件系统中，由于应用环境的变化，需要将一些“现存的对象”放到新的环境中使用，但是新环境要求的接口是这些现存对象所不满足的。如何利用现有对象的良好实现同时又能满足新的应用环境所要求的接口。
 
-基于最小堆：队列的头是符合指定顺序的最小的元素，如果多个元素都是最小值，头是他们其中一个 ...
+定义  将一个类的接口转换成客户希望的另一个接口。Adapter模式使得原来由于接口不兼容而 ...
         
       </div>
-      <a class="more" href="/2020/09/23/jcf-privorityQueue/">Read more</a>
+      <a class="more" href="/2019/11/24/Adapter-pattern/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/jvm-note/">jvm-note</a>
+        <a href="/2019/11/17/nginx-config/">nginx-config</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#jvm" >
-    <span class="tag-code">jvm</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          本文主要是自己整理《深入理解Java虚拟机》一书的知识点，逐渐完善体系，逐渐补充示意图。最终的目标是，在这本书的基础上精简，但不丢失重点，并逐渐添加自己遇到的知识。长文警告！！
-1. 内存区域JVM 在执行Java程序时会将所管理的内存划分为不同的区域。这些区域用途、创建和销毁时间等不同。
- ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/jvm-note/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/java-serilize/">Java 序列化</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#java" >
-    <span class="tag-code">java</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          对象序列化保存对象的“状态”，也就是成员变量，不会关注类中的静态变量和方法。如果对象的成员是对象则递归处理。
-1. 使用场景
-将内存中的对象状态保存到文件或数据库；
-在网络上用socket传输对象；
-通过RMI传输对象。
-
-2. Serializable接口
-任何需要被序列化的对象都需要实现 ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/java-serilize/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/java-memory-model-and-concurrency/">java-memory-model-and-concurrency</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#jvm" >
-    <span class="tag-code">jvm</span>
-  </a>
-
-  <a href="/tags#concurrency" >
-    <span class="tag-code">concurrency</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          内存模型由于计算机的存储设备与处理器的运算速度有几个数量级的差距，现代计算机通过加入一层读写速度尽可能接近处理器运算速度的高速缓存(Cache)到中间作为缓冲。这种解决方案引入了新的问题：缓存一致性(Cache Coerence) 。多处理器系统中，每个处理器都有自己的高速缓存，但它们共享同 ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/java-memory-model-and-concurrency/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/thread-and-competition/">thread-and-competition</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#java" >
-    <span class="tag-code">java</span>
-  </a>
-
-  <a href="/tags#concurrency" >
-    <span class="tag-code">concurrency</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Java 线程线程的实现
-使用内核线程实现：程序使用内核线程(KLT)的高级接口-轻量级进程(LWP)，LWP与KLT是1:1的关系.
-使用用户线程实现:用户线程(UT)内核无法感知，与LWP是1:n的关系；
-混合实现：与LWP是n:m的关系。
-线程模型只对线程的并发规模和操作成本产生影响， ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/thread-and-competition/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/mysql-basic/">mysql-basic</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#mysql" >
-    <span class="tag-code">mysql</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          1. 常用语句
-命令行登录数据库 1mysql -h127.0.0.1 -uroot -p
- 参数： 123-h +ip地址   -u +用户名   -p +密码
-命令行基本操作 12345678910# 显示所有数据库   show databases;   # 选中某个数据库操作   u ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/mysql-basic/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/nginx-config/">nginx-config</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年11月17日</p>
       
         
   <a href="/tags#nginx" >
@@ -362,27 +249,178 @@ round-robin 默认，循环；
 least-connected 下一个请求被分配给连接数 ...
         
       </div>
-      <a class="more" href="/2020/09/23/nginx-config/">Read more</a>
+      <a class="more" href="/2019/11/17/nginx-config/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/redis-dict/">redis-dict</a>
+        <a href="/2019/11/10/singletone/">单例模式</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年11月10日</p>
       
         
-  <a href="/tags#redis" >
-    <span class="tag-code">redis</span>
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
   </a>
 
       
       <div class="article-summary">
         
-          Redis是一个开放源代码（BSD许可）的内存中数据结构存储，用作数据库，缓存和消息代理。 它支持字符串，哈希，列表，集合，带范围查询的排序集合，位图，超日志，带有半径查询和流的地理空间索引strings, hashes, lists, sets, 带范围查询的有序sets, bitmaps ...
+          
+动机  在软件系统中有些特殊的类，必须保证只有一个实例，才能保证逻辑正确性以及良好的效率。如何绕过常规的构造器，来提供一种机制保证一个类只有一个实例。
+
+定义  保证一个类仅有一个实例，并提供一个该实例的全局访问点。
+
+懒汉模式
+  1234567891011121314151617181 ...
         
       </div>
-      <a class="more" href="/2020/09/23/redis-dict/">Read more</a>
+      <a class="more" href="/2019/11/10/singletone/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/03/solrCloud/">solrCloud</a>
+      </h2>
+      <p class="article-date">2019年11月3日</p>
+      
+        
+  <a href="/tags#solr" >
+    <span class="tag-code">solr</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1. 部署通过网上博客的比较，内置zk的方式比较简单，这里暂时使用这种方式。本文部分图片整理自互联网，如有侵权请联系删除。
+
+规划
+
+
+
+参数
+值
+解释
+
+
+
+shards
+3
+每个collection分为3块
+
+
+replicationFactor
+2
+冗余备份一次
+
+
+总块数
+6
+-
+
+ ...
+        
+      </div>
+      <a class="more" href="/2019/11/03/solrCloud/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/27/interator-pattern/">interator-pattern</a>
+      </h2>
+      <p class="article-date">2019年10月27日</p>
+      
+        
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+动机  在软件构建过程中，结合对象内部结构变化各异。但对于这些集合对象，我们希望在不暴露其内部结构的同时，可以让外部客户代码透明的访问其中包含的元素；同时这种“透明遍历”也为“同一种算法在多种结合对象上进行操作”提供了可能。  使用OOP技术将这种遍历机制抽象为“迭代器对象”为“应对变化中 ...
+        
+      </div>
+      <a class="more" href="/2019/10/27/interator-pattern/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/20/java-grocery/">java-grocery</a>
+      </h2>
+      <p class="article-date">2019年10月20日</p>
+      
+        
+  <a href="/tags#java" >
+    <span class="tag-code">java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+默认接口内不能写实现， 1.8 开始接口内可以写由default修饰的方式
+对象类型与基本数据类型的区别
+基本类型是Java语言的一本分，主要是基于程序性能的考量，八种基本类型都有对应的包装类，这些包装类实例化就是对象（Java中一切皆是对象）。
+基本类型定义在栈中，int a=5; 对象 ...
+        
+      </div>
+      <a class="more" href="/2019/10/20/java-grocery/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/13/Java-Collections-Framework/">Java-Collections-Framework</a>
+      </h2>
+      <p class="article-date">2019年10月13日</p>
+      
+        
+  <a href="/tags#jcf" >
+    <span class="tag-code">jcf</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Java平台包括一个集合框架。集合是代表一组对象的对象（例如经典的Vector类）。集合框架是用于表示和操作集合的统一体系结构，使集合可以独立于实现细节进行操作。优点是：
+
+提供数据结构和算法来减少编程工作；
+提供高性能的数据结构和算法的实现来提高性能；
+建立集合来回传递的公共语言使得不相关 ...
+        
+      </div>
+      <a class="more" href="/2019/10/13/Java-Collections-Framework/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/29/JCF-HashMap-and-HashSet/">JCF-HashMap-and-HashSet</a>
+      </h2>
+      <p class="article-date">2019年9月29日</p>
+      
+        
+  <a href="/tags#jcf" >
+    <span class="tag-code">jcf</span>
+  </a>
+
+  <a href="/tags#hash" >
+    <span class="tag-code">hash</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1. Hash Concepts哈希表的本质是一个数组，数组中每一个元素称为一个箱子(bin)，箱子中存放的是键值对。
+
+存储过程：
+
+根据Key计算出它的哈希值h；
+假设箱子的个数为n，这个键值应该放在第(h%n)个箱子里；
+如果该箱子中已经有了键值对，使用开放寻址法(Open hash) ...
+        
+      </div>
+      <a class="more" href="/2019/09/29/JCF-HashMap-and-HashSet/">Read more</a>
     </article>
   
 

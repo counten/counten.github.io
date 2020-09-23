@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      design-pattern | 知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>design-pattern</h2>
+  <p class="post-date">2019-12-10</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>DesignPattern系列文章参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av24176315/?p=1">https://www.bilibili.com/video/av24176315/?p=1 </a>李建中讲的 C++ 设计模式，结合自己的学习心得。</p>
+<h2 id="如何解决复杂性问题"><a href="#如何解决复杂性问题" class="headerlink" title="如何解决复杂性问题"></a>如何解决复杂性问题</h2><ul>
+<li>分解：分而治之</li>
+<li>抽象：忽略他的非本质细节，而去处理泛化和理想化了的对象模型<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2></li>
+<li>重新认识面向对象<ol>
+<li>隔离变化：将变化所带来的影响减为最小</li>
+<li>各司其职：强调各个类的“责任”，由于需求的变化导致的邢增类型不应该影响到原来类型的实现；</li>
+<li>对象：语言层面，对象封装了代码和数据；规格曾main，对象是一系列可被使用的公共接口；概念层面，对象是某种拥有责任的抽象。</li>
+</ol>
+</li>
+<li>面向对象设计原则<ol>
+<li>依赖倒置原则（DIP）<ul>
+<li>高层模块（稳定）不应该依赖于底层模块（变化），二者都应该依赖于抽象（稳定）；</li>
+<li>抽象不应该依赖于实现细节（变化），实现细节应该依赖于抽象（稳定）。</li>
+</ul>
+</li>
+<li>开放封闭原则（OCP）<ul>
+<li>对拓展开放，对修改封闭；</li>
+<li>类模块应该是可拓展的，但是不可修改。</li>
+</ul>
+</li>
+<li>单一职责原则（SRP）<ul>
+<li>一个类应该仅有一个引起它变化的原因；</li>
+<li>变化的方向隐含着类的责任。</li>
+</ul>
+</li>
+<li>Liskov 替换原则（LSP）<ul>
+<li>子类必须能替换他们的基类（IS-A）；</li>
+<li>继承表达类型抽象。</li>
+</ul>
+</li>
+<li>接口隔离原则（ISP）<ul>
+<li>不应该强迫客户程序以来他们不用的方法；</li>
+<li>接口应该小而完备。</li>
+</ul>
+</li>
+<li>优先使用对象组合，而不是类继承<ul>
+<li>类继承通常为“白箱复用”，对象组合通常为“黑箱复用”</li>
+<li>继承在某种程度上破坏了封装性，子类父类耦合度高；</li>
+<li>对象组合原则只要求被组合的对象具有良好的接口定义，耦合度低。</li>
+</ul>
+</li>
+<li>封装变化点<ul>
+<li>使用封装来创建对象之间的分界层，一侧修改不对另一侧产生不良影响，从而实现层次间的松耦合。</li>
+</ul>
+</li>
+<li>针对接口编程，而不是针对实现编程<ul>
+<li>不将变量类型声明为某个特定的具体类，而是声明为某个接口；</li>
+<li>客户程序无需获知对象的具体类型，只需要知道对象所具有的接口。</li>
+<li>减少系统中各部分的依赖关系，从而实现“高内聚，低耦合”。<h2 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h2>重构获得设计模式；代码中经常改变的地方使用设计模式</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>重构关键技法<ol>
+<li>静态–&gt;动态</li>
+<li>早绑定–&gt;晚绑定</li>
+<li>继承–&gt;组合</li>
+<li>编译时依赖–&gt;运行时依赖</li>
+<li>紧耦合–&gt;松耦合<h2 id="模式归类"><a href="#模式归类" class="headerlink" title="模式归类"></a>模式归类</h2></li>
+</ol>
+</li>
+<li>按照目的划分<ol>
+<li>Creational Pattern</li>
+<li>Structural Pattern</li>
+<li>Behavioral Pattern</li>
+</ol>
+</li>
+<li>从范围来看<ol>
+<li>类模型处理类与子类的静态关系；</li>
+<li>对象模式处理对象间的动态关系。</li>
+</ol>
+</li>
+<li>从封装变化角度<ol>
+<li>组件协作模式<br> 框架与应用程序的划分，“组件协作模式”通过<code>晚期绑定</code>来实现矿建与应用程序之间的松耦合，是二者之间写作时常用的模式。<ul>
+<li><a href="designPattern_templateMethod">Template Mathod</a></li>
+<li><a href="designPattern_Strategy">Strategy</a></li>
+<li><a href="designPattern_Observer">Observer/Event</a></li>
+</ul>
+</li>
+<li>“对象创建”模式<br> 通过“对象创建”模式绕开<code>new</code>，来避免对象创建（new）过程中所导致的紧耦合（依赖具体类），从而支持对象创建的稳定。它是接口抽象之后的第一步工作。<ul>
+<li><a href="http://codeyourlife.cn/designPattern_factoryMethod">Factory Method</a></li>
+<li>Abstract Factory</li>
+<li>Prototype</li>
+<li>Builder</li>
+</ul>
+</li>
+<li>“接口隔离”模式<br> 在组件构建过程中，某些接口之间直接的依赖常常会带来许多问题、甚至根本无法实现。采用添加一层间接（稳定）接口，来隔离本来互相紧密关联的接口是一种常见的解决方案。<ul>
+<li>Facade</li>
+<li><a href="designPattern_Proxy">Proxy</a></li>
+<li><a href="designPattern_Adapter">Adapter</a></li>
+<li>Mediator</li>
+</ul>
+</li>
+<li>“对象性能”模式<br> 面向对象很好的解决了“抽象”，但付出了不可避免地代价，有时这个成本需要谨慎处理。<ul>
+<li><a href="designPattern_Singleton">Singleton</a></li>
+<li>Flyweight</li>
+</ul>
+</li>
+<li>“数据结构”模式<br> 一些组件在内部具有特定的数据结构，如果让客户程序依赖这些特定的数据结构，将极大的破坏组件的复用。将这些特定的数据结构封装在内部，在外部提供统一的接口，来实现与特定数据结构无关的访问，是一种行之有效的解决方案。<ul>
+<li>Composite</li>
+<li><a href="designPattern_Iterator">Iterator</a></li>
+<li>Chain of Resposibility</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/24/Adapter-pattern/">
+        <span class="nav-arrow">← </span>
+        
+          Adapter-pattern
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/12/12/spring-aop/">
+        
+          spring-aop
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%A4%8D%E6%9D%82%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-nav-text">如何解决复杂性问题</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-nav-text">面向对象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Before"><span class="toc-nav-text">Before</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%BD%92%E7%B1%BB"><span class="toc-nav-text">模式归类</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://codeyourlife.cn/2019/12/10/design-pattern/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "wbq813";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "design-pattern",
+        owner: "wbq813",
+        repo: "wbq813.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

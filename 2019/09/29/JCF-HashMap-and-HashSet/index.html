@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JCF-HashMap-and-HashSet | 知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JCF-HashMap-and-HashSet</h2>
+  <p class="post-date">2019-09-29</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-Hash-Concepts"><a href="#1-Hash-Concepts" class="headerlink" title="1. Hash Concepts"></a>1. Hash Concepts</h2><p>哈希表的本质是一个数组，数组中每一个元素称为一个箱子(bin)，箱子中存放的是键值对。</p>
+<ul>
+<li><p><strong>存储过程</strong>：</p>
+<ol>
+<li>根据Key计算出它的哈希值h；</li>
+<li>假设箱子的个数为n，这个键值应该放在第(h%n)个箱子里；</li>
+<li>如果该箱子中已经有了键值对，使用开放寻址法(Open hash)或者拉链法(closed hash)解决冲突。</li>
+</ol>
+</li>
+<li><p><strong>拉链法</strong>：<br>  每个箱子是一个链表，属于同一个箱子的所有键值对都会排在链表中。</p>
+</li>
+<li><p><strong>负载因子</strong>：<br>  <code>负载因子=总键值对数/箱子个数</code>，负载因子越大，哈希表越满，越容易导致冲突，性能越低。因此当负载因子超过某个阈值(eg. 0.75)时就需要对哈希表进行扩容。</p>
+</li>
+<li><p><strong>哈希表扩容&amp;rehash</strong>：<br>  哈希表自动扩容时，一般会创建两倍于原来个数的箱子，因此即使key的哈希值h不变，对箱子个数取余(h%n) 也会发生改变，这个过程也成为重哈希（rehash）。<br>  哈希表扩容表面上可以降低负载因子，但可能也无法解决链表过长的问题。假设所有key的哈希值h都一样，即使扩容以后它们也分布在同一个bin的链表上，因此也不能提高性能。</p>
+</li>
+<li><p><strong>可能的缺陷</strong>：</p>
+<ol>
+<li>如果hash表中本来箱子比较多，扩容时要重新hash并移动数据，性能影响较大。</li>
+<li>如果hash函数设计不合理，hash表在极端情况下会退化成线性表，性能极低。</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-HashMap"><a href="#2-HashMap" class="headerlink" title="2.HashMap"></a>2.HashMap</h2><p><img src="https://kityminder-img.gz.bcebos.com/413e4049c486c08e4303caf36a8af92b1afedd12" alt="hashMap.png"></p>
+<ul>
+<li><p><strong>Important Variables</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始容量16个bin，太少，容易触发扩容；太多，遍历hash表会比较慢</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; </span><br><span class="line"><span class="comment">// hash 表最大容量</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line"><span class="comment">// 默认负载因子，这种情况键值对数量&gt;16*0.75=12时就会触发扩容。</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>; </span><br><span class="line"><span class="comment">// 当某个bin中链表长度大于8时，就转化为树</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>; </span><br><span class="line"><span class="comment">// 在hash表扩容时，如果发现链表长度小于6则会将树退化回链表</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>; </span><br><span class="line"><span class="comment">// 在转变成树之前，还会判断，只有键值对数量&gt;64才会发生转换</span></span><br><span class="line"><span class="keyword">static</span>  <span class="keyword">final</span>  <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</span><br><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="keyword">int</span> threshold;</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor;</span><br></pre></td></tr></table></figure>
+<p>  上文说过，如果hash函数不合理，几是扩容也可能无法减少箱子中链表的长度，Java的处理方案是当链表太长时，转换成红黑树。转换还有一个条件是：键值对数量大于 <code>MIN_TREEIFY_CAPACITY</code>。这是为了避免在hash表建立初期，多个键值对七号被放入了同一个链表中，而导致不必要的转化。</p>
+<p>  <strong>8是如何确定的：</strong> （Time-Space Trade-off）TreeNodes占用空间是普通Nodes的两倍，所以只有当bin包含足够多的节点时才会转成TreeNodes，而是否足够多就是由TREEIFY_THRESHOLD的值决定的。当bin中节点数变少时，又会转成普通的bin。当hashCode离散性很好的时候，数据均匀分布在每个bin中，几乎不会有bin中链表长度会达到阈值，树型bin用到的概率非常小。</p>
+<p>  理想情况下，随机hashCode算法下所有bin中节点的分布频率会遵循<strong>泊松分布</strong>，$P(k)=\frac{\lambda^k e^{-\lambda}}{k!}$ 我们可以看到，一个bin中链表长度达到8个元素的概率为0.00000006，几乎是不可能事件。</p>
+<p>   默认resizing threshold 0.75，得到 $\lambda=0.5$ (？？？？)，尽管由于调整大小粒度而差异很大。 忽略方差，列表大小k的预期出现次数是（exp（-0.5）* pow（0.5，k）/ factorial（k））。 </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">数量</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">概率</td>
+<td align="center">0.60653066</td>
+<td align="center">0.30326533</td>
+<td align="center">0.07581633</td>
+<td align="center">0.01263606</td>
+<td align="center">0.00157952</td>
+<td align="center">0.00015795</td>
+<td align="center">0.00001316</td>
+<td align="center">0.00000094</td>
+<td align="center">0.00000006</td>
+</tr>
+</tbody></table>
+<pre><code>    然而JDK不能阻止用户实现不好的hash算法，只能使用红黑树做应急处理。</code></pre>
+<ul>
+<li><p><strong>Main Methods</strong></p>
+<ul>
+<li><p><strong>get()</strong><br>  <code>get()</code> 首先调用<code>hash(key)</code>得到hash值，然后利用<code>getNode</code>方法获取<code>node</code>,然后返回<code>node.value</code>。算法思想是首先通过<code>hash()</code>函数得到对应<code>bin</code>的下标，然后依次遍历冲突链表，通过<code>key.equals(k)</code>方法来判断是否是要找的那个<code>bin</code>。</p>
+<p>  <code>hash(key)&amp;(table.length-1) = hash(key)%table.length</code> 因为<code>table.length</code> 始终时2的幂，因此<code>table.length-1</code>二进制低位全是1，与<code>hash(key)</code>相与就会将hash值的高位抹掉，剩下的就是余数。 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">       Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">              &#x2F;&#x2F; 根据hash得到对应的bin</span><br><span class="line">if ((tab &#x3D; table) !&#x3D; null &amp;&amp; (n &#x3D; tab.length) &gt; 0 &amp;&amp; (first &#x3D; tab[(n - 1) &amp; hash]) !&#x3D; null) &#123;</span><br><span class="line">      &#x2F;&#x2F; bin的链表的第一个元素是否符合</span><br><span class="line">     if (first.hash &#x3D;&#x3D; hash &amp;&amp; ((k &#x3D; first.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">            return first;</span><br><span class="line">     if ((e &#x3D; first.next) !&#x3D; null) &#123;</span><br><span class="line">	&#x2F;&#x2F; 链表是红黑树</span><br><span class="line">       if (first instanceof TreeNode)</span><br><span class="line">            return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">	&#x2F;&#x2F; 遍历链表</span><br><span class="line">       do &#123;</span><br><span class="line">            if (e.hash &#x3D;&#x3D; hash &amp;&amp; ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                return e;</span><br><span class="line">        &#125; while ((e &#x3D; e.next) !&#x3D; null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>put()</strong><br>将key和value放入到map，通过调用<code>putVal</code>实现。找到对应的链表之后插入，这里jdk1.8是加入到链表末尾，之前的版本网上说是在链表头部插入。（尚未验证？？？？）</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,<span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        n = (tab = resize()).length;</span><br><span class="line">    <span class="comment">// map中不存在当前元组，可直接插入</span></span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;<span class="comment">// 冲突的时候</span></span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        <span class="comment">// bin的第一个节点p完全equal插入的元组</span></span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp; ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            e = p;</span><br><span class="line">        <span class="comment">// 该bin已经是红黑树，只能继续加入</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 加入到链表尾部</span></span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// 长度过长时变为红黑树</span></span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 当前bin的链表中存在与插入元组完全equal的情况</span></span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">// 存在与插入元组完全equal</span></span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>) <span class="comment">// 默认替换原来的value，onlyIfAbsent 是控制参数</span></span><br><span class="line">                e.value = value;</span><br><span class="line">                   <span class="comment">// 回调接口</span></span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="keyword">return</span> oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ++modCount;</span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold) <span class="comment">// 重新hash</span></span><br><span class="line">        resize();</span><br><span class="line">    <span class="comment">// 回调接口</span></span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>remove()</strong><br><code>remove(Object key)</code>根据<code>key</code>删除对应的元组，这里调用 <code>removeNode()</code>实现</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">removeNode</span><span class="params">(<span class="keyword">int</span> hash, Object key, Object value, <span class="keyword">boolean</span> matchValue, <span class="keyword">boolean</span> movable)</span> </span>&#123;</span><br><span class="line">      Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, index;</span><br><span class="line">      <span class="keyword">if</span> ((tab = table) != <span class="keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="number">0</span> &amp;&amp; (p = tab[index = (n - <span class="number">1</span>) &amp; hash]) != <span class="keyword">null</span>) &#123;</span><br><span class="line">          Node&lt;K,V&gt; node = <span class="keyword">null</span>, e; K k; V v;</span><br><span class="line">          <span class="comment">// 当前bin的第一个元组p就符合</span></span><br><span class="line">          <span class="keyword">if</span> (p.hash == hash &amp;&amp; ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">              node = p;</span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span> ((e = p.next) != <span class="keyword">null</span>) &#123;</span><br><span class="line"><span class="comment">// 从红黑树中查找</span></span><br><span class="line">              <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                  node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                  <span class="keyword">do</span> &#123;<span class="comment">// 在链表中查找</span></span><br><span class="line">                      <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k)))) &#123;</span><br><span class="line">                          node = e;</span><br><span class="line">                          <span class="keyword">break</span>;</span><br><span class="line">                      &#125;</span><br><span class="line">                      p = e;</span><br><span class="line">                  &#125; <span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 获取的node不为空并且(不用匹配值、值完全相等、值equal)</span></span><br><span class="line">          <span class="keyword">if</span> (node != <span class="keyword">null</span> &amp;&amp; (!matchValue || (v = node.value) == value || (value != <span class="keyword">null</span> &amp;&amp; value.equals(v)))) &#123;</span><br><span class="line">              <span class="keyword">if</span> (node <span class="keyword">instanceof</span> TreeNode) <span class="comment">// 从红黑树移除</span></span><br><span class="line">                  ((TreeNode&lt;K,V&gt;)node).removeTreeNode(<span class="keyword">this</span>, tab, movable);</span><br><span class="line">              <span class="keyword">else</span> <span class="keyword">if</span> (node == p) <span class="comment">// node是当前bin的第一个节点</span></span><br><span class="line">                  tab[index] = node.next;</span><br><span class="line">              <span class="keyword">else</span> <span class="comment">// 是否存在问题？？p和node中间有节点的情况</span></span><br><span class="line">                  p.next = node.next;</span><br><span class="line">              ++modCount;</span><br><span class="line">              --size;</span><br><span class="line">       <span class="comment">// 回调函数</span></span><br><span class="line">              afterNodeRemoval(node);</span><br><span class="line">              <span class="keyword">return</span> node;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125; </span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>HashSet里面有一个HashMap（适配器模式），所有方法都是转发到HashMap实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 虚拟值</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>对于迭代比较频繁的场景，不宜将<em>HashMap</em>的初始大小设的过大。<br>  如上图所示，选择合适的哈希函数，<code>put()</code>和<code>get()</code>方法可以在常数时间内完成。但在对<em>HashMap</em>进行迭代时，需要遍历整个table以及后面跟的冲突链表。</li>
+<li>对于插入元素较多的场景，将初始容量设大可以减少重新哈希的次数。<br>  有两个参数可以影响<em>HashMap</em>的性能：初始容量（inital capacity）和负载系数（load factor）。初始容量指定了初始<code>table</code>的大小，负载系数用来指定自动扩容的临界值。当<code>bin</code>的数量超过<code>capacity*load_factor</code>时，容器将自动扩容并重新哈希。</li>
+<li>要将自定义的对象放入到<code>HashMap</code>或<code>HashSet</code>中，需要@Override <code>hashCode()</code>和<code>equals()</code>方法。<br>  将对象放入到<em>HashMap</em>或<em>HashSet</em>中时，有两个方法需要注意：<code>hashCode()</code>和<code>equals()</code>。<code>hashCode()</code>方法决定了对象会被放到哪个<code>bin</code>里，当多个对象的哈希值冲突时，<code>equals()</code>方法决定了这些对象是否是“同一个对象”。</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#jcf" >
+    <span class="tag-code">jcf</span>
+  </a>
+
+  <a href="/tags#hash" >
+    <span class="tag-code">hash</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/25/apache-jmeter-useage/">
+        <span class="nav-arrow">← </span>
+        
+          apache-jmeter-useage
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/10/13/Java-Collections-Framework/">
+        
+          Java-Collections-Framework
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Hash-Concepts"><span class="toc-nav-text">1. Hash Concepts</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-HashMap"><span class="toc-nav-text">2.HashMap</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HashSet"><span class="toc-nav-text">HashSet</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Summary"><span class="toc-nav-text">Summary</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://codeyourlife.cn/2019/09/29/JCF-HashMap-and-HashSet/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "wbq813";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "JCF-HashMap-and-HashSet",
+        owner: "wbq813",
+        repo: "wbq813.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

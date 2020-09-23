@@ -156,43 +156,132 @@
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/Clion-googleTest-demo/">Clion-googleTest-demo</a>
+        <a href="/2019/08/15/spring-ioc/">spring-ioc</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年8月15日</p>
       
         
-  <a href="/tags#clion" >
-    <span class="tag-code">clion</span>
+  <a href="/tags#javaEE" >
+    <span class="tag-code">javaEE</span>
   </a>
 
-  <a href="/tags#googlTest" >
-    <span class="tag-code">googlTest</span>
-  </a>
-
-  <a href="/tags#test" >
-    <span class="tag-code">test</span>
+  <a href="/tags#spring" >
+    <span class="tag-code">spring</span>
   </a>
 
       
       <div class="article-summary">
         
-          1. 基本步骤
-创建C/C++项目
-将googleTest克隆下来 1git clone https://github.com/google/googletest.git
-将整个googleTest复制到项目里
-配置CMakeLists.txt,下面是示范 12345678910111213 ...
+          Spring IoC本文章包含的所有图片是在 springboot-5.1.8 之上进行的简单分析。容器的初始化过程由具体的实现，用图中红色部分简略表示；整个过程由refresh的调用触发，一般是由具体的applicationContext调用，比如FileSystemXmlApplicat ...
         
       </div>
-      <a class="more" href="/2020/09/23/Clion-googleTest-demo/">Read more</a>
+      <a class="more" href="/2019/08/15/spring-ioc/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/java-String/">java-String</a>
+        <a href="/2019/08/03/redis-dict/">redis-dict</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年8月3日</p>
       
         
+  <a href="/tags#redis" >
+    <span class="tag-code">redis</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Redis是一个开放源代码（BSD许可）的内存中数据结构存储，用作数据库，缓存和消息代理。 它支持字符串，哈希，列表，集合，带范围查询的排序集合，位图，超日志，带有半径查询和流的地理空间索引strings, hashes, lists, sets, 带范围查询的有序sets, bitmaps ...
+        
+      </div>
+      <a class="more" href="/2019/08/03/redis-dict/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/28/windows-note/">windows-note</a>
+      </h2>
+      <p class="article-date">2019年7月28日</p>
+      
+        
+  <a href="/tags#windows" >
+    <span class="tag-code">windows</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Win10 无法进入bios开机之前按住进入bios的键比如(F1,F2,DEL)，然后再按开机按钮。
+XP 无法识别、格式化64GB的USBxp默认不支持很大的USB（即使是SP3），安装原版XP系统之后需要安装补丁(WindowsXP-KB955704-x86-CHS(exfat补丁）. ...
+        
+      </div>
+      <a class="more" href="/2019/07/28/windows-note/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/21/java-memory-model-and-concurrency/">java-memory-model-and-concurrency</a>
+      </h2>
+      <p class="article-date">2019年7月21日</p>
+      
+        
+  <a href="/tags#jvm" >
+    <span class="tag-code">jvm</span>
+  </a>
+
+  <a href="/tags#concurrency" >
+    <span class="tag-code">concurrency</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          内存模型由于计算机的存储设备与处理器的运算速度有几个数量级的差距，现代计算机通过加入一层读写速度尽可能接近处理器运算速度的高速缓存(Cache)到中间作为缓冲。这种解决方案引入了新的问题：缓存一致性(Cache Coerence) 。多处理器系统中，每个处理器都有自己的高速缓存，但它们共享同 ...
+        
+      </div>
+      <a class="more" href="/2019/07/21/java-memory-model-and-concurrency/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/14/thread-and-competition/">thread-and-competition</a>
+      </h2>
+      <p class="article-date">2019年7月14日</p>
+      
+        
+  <a href="/tags#java" >
+    <span class="tag-code">java</span>
+  </a>
+
+  <a href="/tags#concurrency" >
+    <span class="tag-code">concurrency</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Java 线程线程的实现
+使用内核线程实现：程序使用内核线程(KLT)的高级接口-轻量级进程(LWP)，LWP与KLT是1:1的关系.
+使用用户线程实现:用户线程(UT)内核无法感知，与LWP是1:n的关系；
+混合实现：与LWP是n:m的关系。
+线程模型只对线程的并发规模和操作成本产生影响， ...
+        
+      </div>
+      <a class="more" href="/2019/07/14/thread-and-competition/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/07/flyweight-pattern/">flyweight-pattern</a>
+      </h2>
+      <p class="article-date">2019年7月7日</p>
+      
+        
+  <a href="/tags#design-pattern" >
+    <span class="tag-code">design-pattern</span>
+  </a>
+
   <a href="/tags#java" >
     <span class="tag-code">java</span>
   </a>
@@ -204,48 +293,27 @@
       
       <div class="article-summary">
         
-          1. 字符串常量池讨论版本为1.8，从1.7开始字符串常量池在堆区，之前在perm。参考美团技术团队 可能如果常量池中存在当前字符串, 就会直接返回当前字符串 一小句描述不准确，容易引起歧义。
-1.1. 字符串常量池为什么在堆中：perm区比较小，默认只有4M，频繁调用intern()方法会 ...
+          享元模式
+动机
+软件系统采用纯粹对象方案的问题在于大量细粒度的对象会很快充斥在系统中，从而带来很高的运行时代价
+
+定义
+运用共享技术有效的支持大量细粒度对象。
+
+总结
+
+面向对象很好的解决了抽象性的问题，需要考虑对象的代价问题，同时不触及面向对象的抽象性问题。
+Flyweight采用对象共享 ...
         
       </div>
-      <a class="more" href="/2020/09/23/java-String/">Read more</a>
+      <a class="more" href="/2019/07/07/flyweight-pattern/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/JCF-HashMap-and-HashSet/">JCF-HashMap-and-HashSet</a>
+        <a href="/2019/06/23/LinkedHashMap-and-LinkedHashSet/">LinkedHashMap-and-LinkedHashSet</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#jcf" >
-    <span class="tag-code">jcf</span>
-  </a>
-
-  <a href="/tags#hash" >
-    <span class="tag-code">hash</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          1. Hash Concepts哈希表的本质是一个数组，数组中每一个元素称为一个箱子(bin)，箱子中存放的是键值对。
-
-存储过程：
-
-根据Key计算出它的哈希值h；
-假设箱子的个数为n，这个键值应该放在第(h%n)个箱子里；
-如果该箱子中已经有了键值对，使用开放寻址法(Open hash) ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/JCF-HashMap-and-HashSet/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/LinkedHashMap-and-LinkedHashSet/">LinkedHashMap-and-LinkedHashSet</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年6月23日</p>
       
         
   <a href="/tags#jcf" >
@@ -264,187 +332,90 @@
 有序:此实现使客户免于HashMap和Hashtable提供的未指定的，通常混乱 ...
         
       </div>
-      <a class="more" href="/2020/09/23/LinkedHashMap-and-LinkedHashSet/">Read more</a>
+      <a class="more" href="/2019/06/23/LinkedHashMap-and-LinkedHashSet/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/basic-tip-of-os/">basic-tip-of-os</a>
+        <a href="/2019/06/16/solr-similarity/">solr-similarity</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年6月16日</p>
       
         
-  <a href="/tags#os" >
-    <span class="tag-code">os</span>
+  <a href="/tags#solr" >
+    <span class="tag-code">solr</span>
   </a>
 
       
       <div class="article-summary">
         
-          
-Endian（字节序） 字节序是处理器的架构特性，用于表示大的数据类型内部字节的顺序，比如int，假设32-bit的int数字：0x04030201 如下表所示：
+          评分公式Solr采用了最基本的向量空间模型：    
 
-
-
-数字
-04
-03
-02
-01
-
-
-
-有效字节
-MSB
-
-
-LSB
-
-
-大端
-bp[0]
-bp[1]
-bp[2]
-bp[3 ...
+ t = term, d = document, q = query , f = field
+ tf(t in d ) 表示该term 在 这个文档里出现的频率(即出现了几次)。  $$tf(t in d) = numTermOccur ...
         
       </div>
-      <a class="more" href="/2020/09/23/basic-tip-of-os/">Read more</a>
+      <a class="more" href="/2019/06/16/solr-similarity/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/Java-Collections-Framework/">Java-Collections-Framework</a>
+        <a href="/2019/06/08/jvm-note/">jvm-note</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年6月8日</p>
       
         
-  <a href="/tags#jcf" >
-    <span class="tag-code">jcf</span>
+  <a href="/tags#jvm" >
+    <span class="tag-code">jvm</span>
   </a>
 
       
       <div class="article-summary">
         
-          Java平台包括一个集合框架。集合是代表一组对象的对象（例如经典的Vector类）。集合框架是用于表示和操作集合的统一体系结构，使集合可以独立于实现细节进行操作。优点是：
-
-提供数据结构和算法来减少编程工作；
-提供高性能的数据结构和算法的实现来提高性能；
-建立集合来回传递的公共语言使得不相关 ...
+          本文主要是自己整理《深入理解Java虚拟机》一书的知识点，逐渐完善体系，逐渐补充示意图。最终的目标是，在这本书的基础上精简，但不丢失重点，并逐渐添加自己遇到的知识。长文警告！！
+1. 内存区域JVM 在执行Java程序时会将所管理的内存划分为不同的区域。这些区域用途、创建和销毁时间等不同。
+ ...
         
       </div>
-      <a class="more" href="/2020/09/23/Java-Collections-Framework/">Read more</a>
+      <a class="more" href="/2019/06/08/jvm-note/">Read more</a>
     </article>
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/09/23/Zookeeper-Note/">Zookeeper-Note</a>
+        <a href="/2019/06/02/innodb/">innodb</a>
       </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#zookeeper" >
-    <span class="tag-code">zookeeper</span>
-  </a>
-
-  <a href="/tags#javaEE" >
-    <span class="tag-code">javaEE</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          zookeeper = 文件系统+通知机制，和文件系统一样每一个目录项称作znode，能够增加、删除、增加删除子节点，不同的是每个znode可以存储数据。
-
-节点类型
-
-PERSISTENT-持久化目录节点
-PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点
-EPHEMERA ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/Zookeeper-Note/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/myself/">myself</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#wbq813" >
-    <span class="tag-code">wbq813</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          作为一个技术人，常常感觉自己为了手上的事疲于奔命。遇到问题紧张、没有底气，不自信。我希望自己成为一个始终保持平静心态积累知识，遇到问题凭借自己的知识积累能够从容应对。
-
-从容应对的底气
-
-从容应对需要相关的大量知识的积累，以一种不过如此的态度去处理这件事。恐惧和慌张都来源于对事物的未知导致的 ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/myself/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/mysql-in-docker-ubuntu/">mysql-in-docker-ubuntu</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
+      <p class="article-date">2019年6月2日</p>
       
         
   <a href="/tags#mysql" >
     <span class="tag-code">mysql</span>
   </a>
 
-  <a href="/tags#ubuntu" >
-    <span class="tag-code">ubuntu</span>
-  </a>
-
-  <a href="/tags#docker" >
-    <span class="tag-code">docker</span>
+  <a href="/tags#innodb" >
+    <span class="tag-code">innodb</span>
   </a>
 
       
       <div class="article-summary">
         
-          很多人用docker做持续集成，个人也喜欢用来安装软件，少了很多配置而且安装和卸载方便。
+          索引B+ 树索引哈希
+锁锁的类型锁的算法锁问题
+事务
+ACID事务类型
+扁平事务
+带有保存点的扁平事务
+链事务
+嵌套事务
+分布式事务事务实现
+redo
+undo
+purge
+group commit
 
-安装docker
- 你可以采用APT仓库安装，但是Docker官方暂时没有支持Ubuntu18.04，我只能下载离线安装包安装，你的也可以，我觉得是最简单的方式。
- docker官网访问很慢，但是他的 ...
+事务隔离级别ANSI SQL STANDARD 定义了4类隔离级别，包括了一些具体规则，用 ...
         
       </div>
-      <a class="more" href="/2020/09/23/mysql-in-docker-ubuntu/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/09/23/KBQA-Resource/">KBQA-Resource</a>
-      </h2>
-      <p class="article-date">2020年9月23日</p>
-      
-        
-  <a href="/tags#kbqa" >
-    <span class="tag-code">kbqa</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          知识图谱问答相关资源，持续更新，欢迎收藏和提建议。
-
-:star: 表示阅读过；
-:heart: 表示有源代码;
-
-1. Papers1.1 Survey of KGQA
-(2019.7)Introduction to Neural Network based Approaches for  ...
-        
-      </div>
-      <a class="more" href="/2020/09/23/KBQA-Resource/">Read more</a>
+      <a class="more" href="/2019/06/02/innodb/">Read more</a>
     </article>
   
 
