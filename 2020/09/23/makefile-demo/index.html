@@ -168,6 +168,19 @@
 <h2 id="2-Demo"><a href="#2-Demo" class="headerlink" title="2. Demo"></a>2. Demo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dir</span></span><br><span class="line">DIR=$(shell <span class="built_in">pwd</span>)</span><br><span class="line">SRC_DIR=$(DIR)/src</span><br><span class="line">INCLUDE_DIR=$(DIR)/include</span><br><span class="line">DEBUG_DIR=$(DIR)/debug</span><br><span class="line">OBJS=$(DEBUG_DIR)/*.o</span><br><span class="line"></span><br><span class="line"><span class="comment"># setting</span></span><br><span class="line">CC=gcc</span><br><span class="line">CFLAGS=-g -c</span><br><span class="line">PROJNAME=build</span><br><span class="line">MODULE=main exercise</span><br><span class="line"></span><br><span class="line"><span class="comment"># link</span></span><br><span class="line">$(PROJNAME):$(foreach i,$(MODULE),$(i).o)</span><br><span class="line">	$(CC) -o $(DEBUG_DIR)/$(PROJNAME) $(OBJS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">define funC</span><br><span class="line">$(1).o:$(INCLUDE_DIR)/*.h</span><br><span class="line">	$(CC) $(CFLAGS) -o $(DEBUG_DIR)/$(1).o $(SRC_DIR)/$(1).c</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line">$(foreach j,$(MODULE),$(<span class="built_in">eval</span> $(call funC,$(j))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># make clean</span></span><br><span class="line">clean:</span><br><span class="line">	rm $(DEBUG_DIR)/*.o $(DEBUG_DIR)/$(PROJNAME)</span><br><span class="line"></span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#makefile" >
+    <span class="tag-code">makefile</span>
+  </a>
+
+  <a href="/tags#c" >
+    <span class="tag-code">c</span>
+  </a>
+
+      </div>
+    
     <!-- Tags END -->
     <!-- NAV START -->
     
