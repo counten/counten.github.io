@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      solrCloud | 知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>solrCloud</h2>
+  <p class="post-date">2020-09-23</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-部署"><a href="#1-部署" class="headerlink" title="1. 部署"></a>1. 部署</h2><p>通过网上博客的比较，内置zk的方式比较简单，这里暂时使用这种方式。本文部分图片整理自互联网，如有侵权请联系删除。</p>
+<ol>
+<li><p>规划</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shards</td>
+<td>3</td>
+<td>每个collection分为3块</td>
+</tr>
+<tr>
+<td>replicationFactor</td>
+<td>2</td>
+<td>冗余备份一次</td>
+</tr>
+<tr>
+<td>总块数</td>
+<td>6</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p> 假设我打算使用3台服务器部署solrcloud，因此有3个节点，每个节点相当于一台服务器，这里我只创建了一个collection，分为3个shard，每个shard备份一次，总共3*2个部分；node1保存2个，node2 保存2个，node3保存2个shard。<br>借用网上一个图：<br> <img src="https://img.hacpai.com/file/2019/09/b0e2982d924a4d0a87ee9f7522ffadb7-d0a5d103.png" alt="分布式集群架构图"></p>
+</li>
+<li><p>将solr/server/solr 目录下的zoo.cfg和solr.xml 复制到每一个node的solr_home下</p>
+</li>
+<li><p>按照自己的需求配置和修改solrconfig.xml 和schema.xml，比如自定义filed。</p>
+</li>
+<li><p>采用 2.1 或者 2.2 的过程启动solrcloud</p>
+</li>
+<li><p>选择配置的类型，basic_configs data_driven_schema_configs sample_techporducts_configs 然后根据选择的类型复制 solr/server/solr/configsets 里边的示例配置文件到自定义的solr_home；</p>
+</li>
+<li><p>创建collection</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin&#x2F;solr create -c collection1 -d solr_home&#x2F;conf&#x2F;collection1&#x2F; -shards 3 -replicationFactor 2 -p 8983</span><br></pre></td></tr></table></figure>
+<p> 这里-d之后指定配置文件的路径，配置文件会被上传到zookeeper。<br> <img src="https://img.hacpai.com/file/2019/10/image-b7a95fea.png" alt="image.png"></p>
+</li>
+<li><p>向任意一个节点插入数据，solrcloud会自动分配到不同的shard。</p>
+</li>
+</ol>
+<h2 id="2-solrcloud启动过程"><a href="#2-solrcloud启动过程" class="headerlink" title="2. solrcloud启动过程"></a>2. solrcloud启动过程</h2><h4 id="2-1-内置zk"><a href="#2-1-内置zk" class="headerlink" title="2.1 内置zk"></a>2.1 内置zk</h4><ol>
+<li>自行启动第一个节点 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;bin&#x2F;solr -c -p 8983 -s solr_home&#x2F;node1</span><br></pre></td></tr></table></figure>
+ 这里的8983是设置example时的第一个节点的端口号，请保持一致。这里没有指定zk的端口号，默认时solr端口号+1000，这里是9983.</li>
+<li>自行启动其余节点 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;bin&#x2F;solr -c -p 7001 -s solr_home&#x2F;node2 -z 127.0.0.1:9983</span><br><span class="line">.&#x2F;bin&#x2F;solr -c -p 7002 -s solr_home&#x2F;node3 -z 127.0.0.1:9983</span><br></pre></td></tr></table></figure>
+ 我这里是在同一台机器上测试，因此都使用不同的端口。<h4 id="2-2-外置zk"><a href="#2-2-外置zk" class="headerlink" title="2.2 外置zk"></a>2.2 外置zk</h4></li>
+<li>配置一个zk<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 下载二进制</span><br><span class="line">mkdir zk_cluster</span><br><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;zookeeper&#x2F;stable&#x2F;apache-zookeeper-3.5.6-bin.tar.gz</span><br><span class="line">tar -zxvf apache-zookeeper-3.5.6-bin.tar.gz -C zk_cluster</span><br><span class="line">cd zk_cluster</span><br><span class="line">mv apache-zookeeper-3.5.6-bin&#x2F; zk1</span><br><span class="line"># 设置id</span><br><span class="line">mkdir zk1&#x2F;data</span><br><span class="line">echo 1&gt;&gt; zk1&#x2F;data&#x2F;myid</span><br><span class="line"># 修改配置文件</span><br><span class="line">cp zk1&#x2F;conf&#x2F;zoo_sample.cfg zk1&#x2F;conf&#x2F;zoo.cfg </span><br><span class="line">vim zk1&#x2F;conf&#x2F;zoo.cfg </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dataDir&#x3D;&#x2F;home&#x2F;wbq813&#x2F;zk_cluster&#x2F;zk1&#x2F;data</span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort&#x3D;2181</span><br><span class="line">server.1&#x3D;*.*.*.*:2881:3881</span><br><span class="line">server.2&#x3D;*.*.*.*:2882:3882</span><br><span class="line">server.3&#x3D;*.*.*.*:2883:3883</span><br></pre></td></tr></table></figure></li>
+<li>配置另外两个zk<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 复制两份</span><br><span class="line">cp -r zk1&#x2F; zk2</span><br><span class="line">cp -r zk1&#x2F; zk3</span><br><span class="line"># 修改id为2和3</span><br><span class="line">vim zk2&#x2F;data&#x2F;myid</span><br><span class="line">vim zk3&#x2F;data&#x2F;myid</span><br><span class="line"># 修改配置文件的port为2282和2283</span><br><span class="line">vim zk2&#x2F;conf&#x2F;zoo.cfg</span><br><span class="line">vim zk3&#x2F;conf&#x2F;zoo.cfg</span><br></pre></td></tr></table></figure></li>
+<li>启动zk<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动</span><br><span class="line">.&#x2F;zk1&#x2F;bin&#x2F;zkServer.sh start</span><br><span class="line">.&#x2F;zk2&#x2F;bin&#x2F;zkServer.sh start</span><br><span class="line">.&#x2F;zk3&#x2F;bin&#x2F;zkServer.sh start</span><br></pre></td></tr></table></figure></li>
+<li>启动solr<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOLR_BASE=../solr</span><br><span class="line">SOLR_BIN=<span class="variable">$SOLR_BASE</span>/bin</span><br><span class="line">ZK_HOST=localhost:2181,localhost:2182,localhost:2183</span><br><span class="line"><span class="variable">$SOLR_BIN</span>/solr start -c -p 8983 -s ./node1 -z <span class="variable">$ZK_HOST</span></span><br><span class="line"><span class="variable">$SOLR_BIN</span>/solr start -c -p 7001 -s ./node2 -z <span class="variable">$ZK_HOST</span></span><br><span class="line"><span class="variable">$SOLR_BIN</span>/solr start -c -p 7002 -s ./node3 -z <span class="variable">$ZK_HOST</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="3-修改Filed"><a href="#3-修改Filed" class="headerlink" title="3. 修改Filed"></a>3. 修改Filed</h2><ol>
+<li>修改filed<ul>
+<li>更新zk中的配置文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COLLECTION=search_music</span><br><span class="line">ZK_HOST=localhost:2181,localhost:2182,localhost:2183</span><br><span class="line"><span class="variable">$SOLR_BASE</span>/server/scripts/cloud-scripts/zkcli.sh -zkhost <span class="variable">$ZK_HOST</span> -cmd upconfig -confdir ./conf/<span class="variable">$COLLECTION</span> -confname <span class="variable">$COLLECTION</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>连接检查   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接检查</span></span><br><span class="line">./zk_cluster/zk1/bin/zkCli.sh</span><br><span class="line">ls /configs/search_music</span><br></pre></td></tr></table></figure></li>
+<li>重启所有节点或者重新加载：<a target="_blank" rel="noopener" href="http://110.64.66.208:8983/solr/admin/collections?action=RELOAD&amp;name=search_music">http://110.64.66.208:8983/solr/admin/collections?action=RELOAD&amp;name=search_music</a></li>
+</ul>
+<h2 id="4-原理"><a href="#4-原理" class="headerlink" title="4. 原理"></a>4. 原理</h2><ol>
+<li>创建索引<br><img src="https://img.hacpai.com/file/2019/10/20151217015401414-cfc2ff73.png" alt="20151217015401414.png"><br>以solrj构建索引为例：</li>
+</ol>
+<ul>
+<li><p>当SolrJ发送update请求给CloudSolrServer ，CloudSolrServer会连接至Zookeeper获取当前SolrCloud的集群状态，并会在/clusterstate.json 和/live_nodes 注册watcher，便于监视Zookeeper和SolrCloud，这样做的好处有以下几点：</p>
+<ul>
+<li>CloudSolrServer获取到SolrCloud的状态后，它能跟直接将document发往SolrCloud的leader，降低网络转发消耗。</li>
+<li>注册watcher有利于建索引时候的负载均衡，比如如果有个节点leader下线了，那么CloudSolrServer会立马得知，那它就会停止往下线leader发送document。</li>
+</ul>
+</li>
+<li><p>路由document至正确的shard。CloudSolrServer 在发送document时候需要知道发往哪个shard，但是这里需要注意，单个document的路由非常简单，但是SolrCloud支持批量add，也就是说正常情况下N个document同时进行路由。这个时候SolrCloud就会根据document路由的去向分开存放document即进行分类（这里应该是有聚类，官方文档的说法见前面说的），然后进行并发发送至相应的shard，这就需要较高的并发能力。</p>
+</li>
+<li><p>Leader接受到update请求后，先将update信息存放到本地的update log，同时Leader还会给documrnt分配新的version，对于已存在的document，Leader就会验证分配的新version与已有的version，如果新的版本高就会抛弃旧版本，最后发送至replica。</p>
+</li>
+<li><p>当只有一个Replica的时候，replica会进入recoveing状态并持续一段时间等待leader重新上线，如果在这段时间内，leader没有上线，replica会转成leader并有一些文档损失。（我的理解：如果leader挂了，请求还会发送成功？？？？  ）</p>
+</li>
+<li><p>最后的步骤就是commit了，commit有两种，一种是softcommit，即在内存中生成segment，document是可见的(可查询到)但是没有写入磁盘，断电后数据丢失。另一种是hardcommit，直接将数据写入磁盘且数据可见。前一种消耗较少，后一种消耗较大。</p>
+</li>
+</ul>
+<p>每commit一次，就会重新生成一个ulog更新日志，当服务器挂掉，内存数据丢失，就可以从ulog中恢复</p>
+<ol>
+<li>Shard分裂<br>![20151217015557737.png](<a target="_blank" rel="noopener" href="https://img.hacpai.com/file">https://img.hacpai.com/file</a></li>
+</ol>
+</section>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/09/23/spring-aop/">
+        <span class="nav-arrow">← </span>
+        
+          spring-aop
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/09/23/solr-similarity/">
+        
+          solr-similarity
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E9%83%A8%E7%BD%B2"><span class="toc-nav-text">1. 部署</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-solrcloud%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-nav-text">2. solrcloud启动过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1-%E5%86%85%E7%BD%AEzk"><span class="toc-nav-text">2.1 内置zk</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2-%E5%A4%96%E7%BD%AEzk"><span class="toc-nav-text">2.2 外置zk</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-%E4%BF%AE%E6%94%B9Filed"><span class="toc-nav-text">3. 修改Filed</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-%E5%8E%9F%E7%90%86"><span class="toc-nav-text">4. 原理</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://codeyourlife.cn/2020/09/23/solrCloud/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "wbq813";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "solrCloud",
+        owner: "wbq813",
+        repo: "wbq813.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

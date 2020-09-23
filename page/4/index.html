@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/java-String/">java-String</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          1. 字符串常量池讨论版本为1.8，从1.7开始字符串常量池在堆区，之前在perm。参考美团技术团队 可能如果常量池中存在当前字符串, 就会直接返回当前字符串 一小句描述不准确，容易引起歧义。
+1.1. 字符串常量池为什么在堆中：perm区比较小，默认只有4M，频繁调用intern()方法会 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/java-String/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/JCF-HashMap-and-HashSet/">JCF-HashMap-and-HashSet</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          1. Hash Concepts哈希表的本质是一个数组，数组中每一个元素称为一个箱子(bin)，箱子中存放的是键值对。
+
+存储过程：
+
+根据Key计算出它的哈希值h；
+假设箱子的个数为n，这个键值应该放在第(h%n)个箱子里；
+如果该箱子中已经有了键值对，使用开放寻址法(Open hash) ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/JCF-HashMap-and-HashSet/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/LinkedHashMap-and-LinkedHashSet/">LinkedHashMap-and-LinkedHashSet</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          IntroductionLinkedHashMap 继承了 HashMap 与HashMap不同的是，它维护一个贯穿所有entries的双向链表，这个双向链表定义了迭代顺序(通常是key插入到map的顺序)。
+
+有序:此实现使客户免于HashMap和Hashtable提供的未指定的，通常混乱 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/LinkedHashMap-and-LinkedHashSet/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/basic-tip-of-os/">basic-tip-of-os</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+Endian（字节序） 字节序是处理器的架构特性，用于表示大的数据类型内部字节的顺序，比如int，假设32-bit的int数字：0x04030201 如下表所示：
+
+
+
+数字
+04
+03
+02
+01
+
+
+
+有效字节
+MSB
+
+
+LSB
+
+
+大端
+bp[0]
+bp[1]
+bp[2]
+bp[3 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/basic-tip-of-os/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/Java-Collections-Framework/">Java-Collections-Framework</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          Java平台包括一个集合框架。集合是代表一组对象的对象（例如经典的Vector类）。集合框架是用于表示和操作集合的统一体系结构，使集合可以独立于实现细节进行操作。优点是：
+
+提供数据结构和算法来减少编程工作；
+提供高性能的数据结构和算法的实现来提高性能；
+建立集合来回传递的公共语言使得不相关 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/Java-Collections-Framework/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/Zookeeper-Note/">Zookeeper-Note</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          zookeeper = 文件系统+通知机制，和文件系统一样每一个目录项称作znode，能够增加、删除、增加删除子节点，不同的是每个znode可以存储数据。
+
+节点类型
+
+PERSISTENT-持久化目录节点
+PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点
+EPHEMERA ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/Zookeeper-Note/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/myself/">myself</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          作为一个技术人，常常感觉自己为了手上的事疲于奔命。遇到问题紧张、没有底气，不自信。我希望自己成为一个始终保持平静心态积累知识，遇到问题凭借自己的知识积累能够从容应对。
+
+从容应对的底气
+
+从容应对需要相关的大量知识的积累，以一种不过如此的态度去处理这件事。恐惧和慌张都来源于对事物的未知导致的 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/myself/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/mysql-in-docker-ubuntu/">mysql-in-docker-ubuntu</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          很多人用docker做持续集成，个人也喜欢用来安装软件，少了很多配置而且安装和卸载方便。
+
+安装docker
+ 你可以采用APT仓库安装，但是Docker官方暂时没有支持Ubuntu18.04，我只能下载离线安装包安装，你的也可以，我觉得是最简单的方式。
+ docker官网访问很慢，但是他的 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/mysql-in-docker-ubuntu/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/KBQA-Resource/">KBQA-Resource</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          知识图谱问答相关资源，持续更新，欢迎收藏和提建议。
+
+:star: 表示阅读过；
+:heart: 表示有源代码;
+
+1. Papers1.1 Survey of KGQA
+(2019.7)Introduction to Neural Network based Approaches for  ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/KBQA-Resource/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/peanut/">peanut</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          简单的web框架，高性能，模块独立，持续更新(C++)，唯一开源地址https://github.com/wbq813/Peanut.
+Simple web backend framework;
+High performace, indenpendent modules, updating  ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/peanut/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/3/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a href="/page/5/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/DesignPattern-Observer/">DesignPattern-Observer</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+动机在软件构建过程中，我们需要为某些对象建立一种“通知依赖关系” 当一个对象（Subject）的状态发生改变时，所有依赖于它的对象（Observer）都得到通知。如果这样的依赖关系过于紧密，软件就不能很好的应对变化。如何弱化这种依赖关系，并形成一种稳定的依赖关系。从而实现软件体系结构的松耦 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/DesignPattern-Observer/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/DesignPattern-Strategy/">DesignPattern-Strategy</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+动机在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使得对象变得异常复杂；而且有时候支持不适用的算法也是一个性能负担。如何在运行时根据需要更改对象的算法，将算法与对象本身解耦？
+定义定义一系列算法，把他们一个个封装起来，并且使他们可相互替换（变 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/DesignPattern-Strategy/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/DesignPattern-Proxy/">DesignPattern-Proxy</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+动机在面向对象系统中，有些对象由于某种原因（比如对象创建的开销很大，或者某些操作需要安全控制，或者需要进程外的访问等），直接访问会给使用者、或者系统结构带来很多麻烦。如何在不是去透明操作对象的同时来管理/控制这些对象特有的复杂性？增加一层间接层是软件开发中常见的解决方式。
+
+定义为其他对象 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/DesignPattern-Proxy/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/singletone/">单例模式</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+动机  在软件系统中有些特殊的类，必须保证只有一个实例，才能保证逻辑正确性以及良好的效率。如何绕过常规的构造器，来提供一种机制保证一个类只有一个实例。
+
+定义  保证一个类仅有一个实例，并提供一个该实例的全局访问点。
+
+懒汉模式
+  1234567891011121314151617181 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/singletone/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/apache-jmeter-useage/">apache-jmeter-useage</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          
+简介 性能测试采用Apache-Jmeter工具进行。
+
+该工具能够通过线程模拟用户；
+通过CSV数据文件设置组件读取自定义的CSV文件（CSV文件用于存储自定义变量，比如测试用例）；
+通过cookie提取器提取系统返回的cookie（用户多次关联请求的测试，或者绕过请求验证）；
+提供汇总 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/apache-jmeter-useage/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/09/23/java-serilize/">Java 序列化</a>
+      </h2>
+      <p class="article-date">2020年9月23日</p>
+      
+      <div class="article-summary">
+        
+          对象序列化保存对象的“状态”，也就是成员变量，不会关注类中的静态变量和方法。如果对象的成员是对象则递归处理。
+1. 使用场景
+将内存中的对象状态保存到文件或数据库；
+在网络上用socket传输对象；
+通过RMI传输对象。
+
+2. Serializable接口
+任何需要被序列化的对象都需要实现 ...
+        
+      </div>
+      <a class="more" href="/2020/09/23/java-serilize/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/17/innodb/">innodb</a>
+      </h2>
+      <p class="article-date">2019年11月17日</p>
+      
+      <div class="article-summary">
+        
+          索引B+ 树索引哈希
+锁锁的类型锁的算法锁问题
+事务
+ACID事务类型
+扁平事务
+带有保存点的扁平事务
+链事务
+嵌套事务
+分布式事务事务实现
+redo
+undo
+purge
+group commit
+
+事务隔离级别ANSI SQL STANDARD 定义了4类隔离级别，包括了一些具体规则，用 ...
+        
+      </div>
+      <a class="more" href="/2019/11/17/innodb/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/4/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
