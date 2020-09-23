@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Java 序列化 | 知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Java 序列化</h2>
+  <p class="post-date">2020-09-23</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>对象序列化保存对象的“状态”，也就是成员变量，不会关注类中的静态变量和方法。如果对象的成员是对象则递归处理。</p>
+<h4 id="1-使用场景"><a href="#1-使用场景" class="headerlink" title="1. 使用场景"></a>1. 使用场景</h4><ul>
+<li>将内存中的对象状态保存到文件或数据库；</li>
+<li>在网络上用socket传输对象；</li>
+<li>通过RMI传输对象。</li>
+</ul>
+<h4 id="2-Serializable接口"><a href="#2-Serializable接口" class="headerlink" title="2. Serializable接口"></a>2. <code>Serializable</code>接口</h4><ul>
+<li>任何需要被序列化的对象都需要实现此接口，此接口完全为空，只用来说明此接口实现类的对象可以被序列化。</li>
+<li>如果父类实现此接口，子类自动可序列化，不用显示实现此接口；</li>
+<li>如果子类实现而父类没实现，那么父类必须有无参构造方法（如果自定义了有参构造函数，就必须写出无参构造函数；都没有时默认生成无参构造函数），此时反序列化得到的对象的父类变量可能和当前的父类变量不同。</li>
+<li><code>String</code>、<code>Enum</code>、<code>数组</code>可序列化，此外必须实现了此接口，才可序列化。</li>
+</ul>
+<h4 id="3-对象读写"><a href="#3-对象读写" class="headerlink" title="3. 对象读写"></a>3. 对象读写</h4><p>  序列化工作通过<code>ObjectOutputStream</code>和<code>ObjectInputStream</code>来完成的，使用<code>writeObject</code>和<code>readObject</code>对对象进行读写，对于基本类型，可采用<code>readInt</code>|<code>weiteInt</code>等接口读写。</p>
+<h4 id="4-transient关键字"><a href="#4-transient关键字" class="headerlink" title="4. transient关键字"></a>4. <code>transient</code>关键字</h4><p>  修饰类的变量使得序列化过程忽略该变量(修饰<code>static</code>变量不报错，没意义)，此关键字标识的引用会以<code>null</code>返回，基本类型以对应的默认值返回。</p>
+<h4 id="5-serialVersionUID"><a href="#5-serialVersionUID" class="headerlink" title="5. serialVersionUID"></a>5. <code>serialVersionUID</code></h4><p>  Java序列化机制通过<code>serialVersionUID</code>判断类的版本一致性，同样的类如果<code>serialVersionUID</code>不同不能互相反序列化。<code>InvalidClassException</code>。</p>
+<h4 id="6-存储规则"><a href="#6-存储规则" class="headerlink" title="6. 存储规则"></a>6. 存储规则</h4><ul>
+<li>同一个对象多次存入一个文件，只是多存储一份引用；</li>
+<li>修改后的对象存入同一个文件，判断文件中已有该对象，后面只存储引用，依次读出的对象都是第一次的对象，没有修改的值。</li>
+</ul>
+<h4 id="writeObject和readObject"><a href="#writeObject和readObject" class="headerlink" title="writeObject和readObject"></a><code>writeObject</code>和<code>readObject</code></h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(ObjectOutputStream out)</span></span>&#123;</span><br><span class="line">    out.defaultWriteObject();</span><br><span class="line">    out.writeInt(area); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(ObjectInputStream in)</span></span>&#123;</span><br><span class="line">    in.defaultReadObject();</span><br><span class="line">    area = in.readInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>序列化类定义这两个方法必须是<code>private</code>(使用反射调用的)。</li>
+<li><code>writeInt</code>是将<code>area</code>单独保存到文件，而非保存成对象的属性，<code>readInt</code>是单独读取并设置成属性。</li>
+<li>序列化对象时，如果对象有<code>writeObject</code>方法，则调用，否则执行默认序列化规则；反序列化同理。</li>
+</ul>
+<h4 id="7-Externalizable接口"><a href="#7-Externalizable接口" class="headerlink" title="7. Externalizable接口"></a>7. <code>Externalizable</code>接口</h4><p>  <code>Externalizable</code>继承于<code>Serializable</code>，当使用该接口时，序列化的细节需要由程序员去完成。</p>
+<ul>
+<li>实现<code>writeExternal</code>和<code>readExternal</code>方法</li>
+<li>序列化类必须有<code>public</code>无参构造函数(<code>readExternal</code>先调用无参构造函数创建对象，再自行赋值)</li>
+<li>生成文件存储格式和<code>Serializable</code>不太相同</li>
+</ul>
+<h4 id="8-readResolve"><a href="#8-readResolve" class="headerlink" title="8. readResolve()"></a>8. <code>readResolve()</code></h4><p>  用于解决反序列化后违背单例的问题。</p>
+<p>  无论是实现<code>Serializable</code>接口，或是<code>Externalizable</code>接口，当从<code>I/O</code>流中读取对象时，<code>readResolve()</code>方法都会被调用到。实际上就是用<code>readResolve()</code>中返回的对象直接替换在反序列化过程中创建的对象。</p>
+<p>  测试发现，使用``Externalizable<code>时，此方法</code>readExternal<code>之后调用；使用</code>Serializable<code>时，也是在</code>readObject`之后调用。</p>
+<h4 id="9-缺点"><a href="#9-缺点" class="headerlink" title="9. 缺点"></a>9. <strong>缺点</strong></h4><ul>
+<li>无法跨语言</li>
+<li>序列化后的码流较大</li>
+<li>序列化性能较低</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+    
+      <a class="nav-right" href="/2020/09/23/apache-jmeter-useage/">
+        
+          apache-jmeter-useage
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-nav-text">1. 使用场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-Serializable%E6%8E%A5%E5%8F%A3"><span class="toc-nav-text">2. Serializable接口</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-%E5%AF%B9%E8%B1%A1%E8%AF%BB%E5%86%99"><span class="toc-nav-text">3. 对象读写</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-transient%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-nav-text">4. transient关键字</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5-serialVersionUID"><span class="toc-nav-text">5. serialVersionUID</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#6-%E5%AD%98%E5%82%A8%E8%A7%84%E5%88%99"><span class="toc-nav-text">6. 存储规则</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#writeObject%E5%92%8CreadObject"><span class="toc-nav-text">writeObject和readObject</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#7-Externalizable%E6%8E%A5%E5%8F%A3"><span class="toc-nav-text">7. Externalizable接口</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#8-readResolve"><span class="toc-nav-text">8. readResolve()</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-%E7%BC%BA%E7%82%B9"><span class="toc-nav-text">9. 缺点</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://codeyourlife.cn/2020/09/23/java-serilize/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "yanm1ng";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Java 序列化",
+        owner: "yanm1ng",
+        repo: "yanm1ng.github.io",
+        oauth: {
+          client_id: "0f87e490e00ee3fd87ef",
+          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
