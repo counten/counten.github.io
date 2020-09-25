@@ -10,7 +10,7 @@
   
   <title>
     
-      Knowledge-Graph-Embedding-Based-Question-Answering | 知芯
+      Knowledge Graph Embedding Based Question Answering | 知芯
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -165,7 +165,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>Knowledge-Graph-Embedding-Based-Question-Answering</h2>
+  <h2>Knowledge Graph Embedding Based Question Answering</h2>
   <p class="post-date">2020-09-25</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -187,9 +187,34 @@
 
 <p>输入一个简单问句，找到在<code>predicates embedding</code>空间中的点，作为 <code>predicates</code>的表示$\hat{P}_l$，在<code>entities embedding</code>空间中的点，作为 <code>entities</code>的表示$\hat{e}_h$。能够被$G$回答的所有问题的<code>predicates</code>向量表示都应该在<code>predicates embedding</code>中，因此模型输入简单问题，返回<code>predicates embedding</code>中离$P_l$(标注)最近的向量$\hat{P}_l$(预测).</p>
 <ul>
-<li><code>BiLSTM</code> 捕获词的不同重要性和顺序信息</li>
+<li><p><code>Word Embedding</code><br>  问题长度<code>L</code>，基于预训练模型<code>Glove</code>将问题的<code>L</code>个<code>token</code>映射为词嵌入向量序列$\{x_j\}, j=1,…L$。</p>
+</li>
+<li><p><code>BiLSTM</code> 捕获词的不同重要性和顺序信息<br>  学习前向隐藏状态序列$(\overrightarrow{h}_1, \overrightarrow{h}_2, …, \overrightarrow{h}_L)$和后向隐藏状态序列$(\overleftarrow{h}_1, \overleftarrow{h}_2, …, \overleftarrow{h}_L)$，比如 $\{\overleftarrow{h}_j\}$通过如下公式计算：</p>
+<p>  $$ForgetGate: f_j=\sigma(W_{xf}x_j+W_{hf}\overleftarrow{h}_{j+1}+b_f)$$</p>
+<p>  $$InputGate: i_j=\sigma(W_{xj}x_j+W_{hi}\overleftarrow{h}_{j+1}+b_i)$$</p>
+<p>  $$OutputGate: o_j=\sigma(W_{xo}x_j+W_{ho}\overleftarrow{h}_{j+1}+b_o)$$</p>
+<p>  $$CellState: c_j=f_j \circ c_{j+1}+i_j\tanh(W_{xc}x_j+W_{hc}\overleftarrow{h}_{j+1}+b_c)$$</p>
+<p>  $$\overleftarrow{h}_j=o_j \circ \tanh(c_j)$$</p>
+<p>  连接前向后向隐藏状态向量$h_j=[\overrightarrow{h}_j; \overleftarrow{h}_j]$</p>
+</li>
+<li><p><code>Attention</code><br>  通过$h_j$和$x_j$计算<code>attention</code> 权重$\alpha_j$：</p>
+<p>  $$q_j = \tanh(w^\top[x_j; h_j])+b_q$$ $$\alpha_j=\frac{exp(q_j)}{\sum_{i=j}^L exp(q_i)}$$</p>
+</li>
+<li><p>中间层<br>  将<code>attention</code> 权重应用到$h_j$，并与$x_j$连接得到新的隐藏状态$s_j=[x_j;\alpha_j h_j]$</p>
+</li>
+<li><p>全连接层<br>  在$s_j$上增加全连接层得到$r_j \epsilon R^{d \times 1}$就是第<code>j</code>个<code>token</code>的目标向量。</p>
+</li>
+<li><p>预测<code>predicate</code> $\hat{P}_{l}$</p>
+<p>  $$= \frac{1}{L} \sum_{j=1}^L r_j^\top$$</p>
+</li>
 </ul>
-<h3 id="1-3-Head-Entity-Detection-Model"><a href="#1-3-Head-Entity-Detection-Model" class="headerlink" title="1.3 Head Entity Detection Model"></a>1.3 Head Entity Detection Model</h3><h3 id="1-4-Join-Search-On-Embedding-Spaces"><a href="#1-4-Join-Search-On-Embedding-Spaces" class="headerlink" title="1.4 Join Search On Embedding Spaces"></a>1.4 Join Search On Embedding Spaces</h3><h2 id="2-实验"><a href="#2-实验" class="headerlink" title="2. 实验"></a>2. 实验</h2><h2 id="0-个人感悟"><a href="#0-个人感悟" class="headerlink" title="0. 个人感悟"></a>0. 个人感悟</h2><p>实习回来，浮躁了一段时间，是时候静下心来准备毕业论文了，非常惭愧，读研两年了，静下心看论文的情况并不多。在《极客时间》的《卖桃者说》听到一个观点，有输出的学习才会更加有效，认真输出的内容会得到反馈，反馈能够促使自己更加热爱学习。所谓的正向循环就是如此，不过就是利用邪恶的多巴胺。自己在这方面确实有所欠缺，半年前听到实验室大佬谈论<strong>正向循环</strong>，自己也尝试调整自己，寻找自己的正向循环，但疲于奔命，不了了之。重新整理了一下博客，支持公式输入，望借此构成自己阅读论文的正向循环，重新起航。</p>
+<p>$\hat{e}_h$同样通过上述模型进行预测，得到的$\hat{e}_h$主要用于处理歧义问题。因为直接使用它与$E$中所有<code>entity</code>比较太耗时。使用下面的探测模型降低候选<code>head entity</code>的数量。</p>
+<h3 id="1-3-Head-Entity-Detection-Model"><a href="#1-3-Head-Entity-Detection-Model" class="headerlink" title="1.3 Head Entity Detection Model"></a>1.3 Head Entity Detection Model</h3><img src="hed.png" alt="hed" style="zoom: 50%;" />
+训练数据为问题$Q$和对应的实体名称标注。
+下层的`BiLSTEM`与前面一致，通过全连接层后接入`SoftMax`得到的结果$v_j \epsilon R^{2 \times 1}$ ，$v_j$的两个值分别表示`token j`是实体名称的概率和不是实体名称的概率。
+
+<p>需要注意，候选实体可能只是真正实体的一部分，因此包含这些实体名称的都作为候选<code>head entity</code></p>
+<h3 id="1-4-Join-Search-On-Embedding-Spaces"><a href="#1-4-Join-Search-On-Embedding-Spaces" class="headerlink" title="1.4 Join Search On Embedding Spaces"></a>1.4 Join Search On Embedding Spaces</h3><h2 id="2-实验"><a href="#2-实验" class="headerlink" title="2. 实验"></a>2. 实验</h2><h2 id="0-个人感悟"><a href="#0-个人感悟" class="headerlink" title="0. 个人感悟"></a>0. 个人感悟</h2><p>实习回来，浮躁了一段时间，是时候静下心来准备毕业论文了，非常惭愧，读研两年了，静下心看论文的情况并不多。在《极客时间》的《卖桃者说》听到一个观点，有输出的学习才会更加有效，认真输出的内容会得到反馈，反馈能够促使自己更加热爱学习。所谓的正向循环就是如此，不过就是利用邪恶的多巴胺。自己在这方面确实有所欠缺，半年前听到实验室大佬谈论<strong>正向循环</strong>，自己也尝试调整自己，寻找自己的正向循环，但疲于奔命，不了了之。重新整理了一下博客，支持公式输入，望借此构成自己阅读论文的正向循环，重新起航。</p>
 </section>
     <!-- Tags START -->
     
@@ -333,7 +358,7 @@
     var gitmentConfig = "wbq813";
     if (gitmentConfig !== 'undefined') {
       // var gitment = new Gitment({
-      //   id: "Knowledge-Graph-Embedding-Based-Question-Answering",
+      //   id: "Knowledge Graph Embedding Based Question Answering",
       //   owner: "wbq813",
       //   repo: "wbq813.github.io",
       //   oauth: {
@@ -361,7 +386,7 @@
         repo: "wbq813.github.io",      // The repository of store comments,
         owner: "wbq813",
         admin: ['wbq813'],
-        id: "Knowledge-Graph-Embedding-Based-Question-Answering",      // Ensure uniqueness and length less than 50
+        id: "Knowledge Graph Embedding Based Question Answering",      // Ensure uniqueness and length less than 50
         distractionFreeMode: false  // Facebook-like distraction free mode
       })
 
