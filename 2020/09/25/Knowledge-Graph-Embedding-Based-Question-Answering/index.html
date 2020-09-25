@@ -177,8 +177,8 @@
     <section class="markdown-content"><p>百度团队发表在WSDM19年的<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3289600.3290956">文章</a>。通过谓词划分数据集，使得训练集合测试集之间没有关联，用以验证模型泛化能力。分别验证每部分损失函数的作用。实体数量较多，直接用预测的实体去匹配复杂度高，通过识别实体名称，缩小候选实体范围。<br><code>KG embedding</code>将知识图谱表示成低维向量，使得在学习的向量中知识图谱原有的结构和关系得到保留。</p>
 <h2 id="1-思想"><a href="#1-思想" class="headerlink" title="1. 思想"></a>1. 思想</h2><p><img src="keqa.png" alt="keqa"></p>
 <ul>
-<li>输入<br>  知识图谱$G$，带有答案的问题集$Q$</li>
-<li>输出</li>
+<li>输入<br>  知识图谱$G$，带有答案、谓词标注、(谓词对应embedding向量)、实体标注、头实体标注、(头实体对应embedding向量) 的问题集$Q$</li>
+<li>输出<br>  联合损失最小的候选答案。</li>
 </ul>
 <h3 id="1-1-Knowledge-Graph-Embedding"><a href="#1-1-Knowledge-Graph-Embedding" class="headerlink" title="1.1 Knowledge Graph Embedding"></a>1.1 Knowledge Graph Embedding</h3><p>$P$ 表示<code>predicates</code>的  <code>embedding</code>，$E$ 表示 <code>entities</code>的 <code>embedding</code>，$P$和$E$作为后续子任务的基础设施。文章使用现有<code>KG embedding</code>算法学习$P$和$E$。<br>对于知识图谱$G$中的每个事实$(h,l,t)$，对应的<code>embedding</code>表示为$(e_h, P_l, e_t)$，<code>embedding</code>算法将$e_h, P_l, e_t$随机初始化或者基于训练好的词向量(可用预训练模型?)初始化，函数$f(.)$定义事实在<code>embedding</code>中的关系$e_t \approx f(e_h, P_l)$，比如:<br>$$TransE: e_t \approx e_h + P_l$$ $$TransR: e_t M_l \approx e_h M_l + P_l $$ $M_l$是<code>predicates</code><br>$l$的变换矩阵。最后，算法最小化知识图谱$G$中所有事实的$e_t$和$f(e_h,P_l)$的距离。</p>
 <h3 id="1-2-Predicate-and-Head-Entity-Learning-Model"><a href="#1-2-Predicate-and-Head-Entity-Learning-Model" class="headerlink" title="1.2 Predicate and Head Entity Learning Model"></a>1.2 Predicate and Head Entity Learning Model</h3><img src="predicate_head_learn_model.png" alt="predicate_head_learn_model" style="zoom: 33%;" />
@@ -204,6 +204,8 @@
 </li>
 <li><p>预测<code>predicate</code> $\hat{P}_{l}$</p>
 <p>  $$= \frac{1}{L} \sum_{j=1}^L r_j^\top$$</p>
+</li>
+<li><p>损失函数: $||P_l-\frac{1}{L}\sum_{j=1}^\top||_2$ 和 $||e_h-\frac{1}{L}\sum_{j=1}^\top||_2$</p>
 </li>
 </ul>
 <p>$\hat{e}_h$同样通过上述模型进行预测，得到的$\hat{e}_h$主要用于处理歧义问题。因为直接使用它与$E$中所有<code>entity</code>比较太耗时。使用下面的探测模型降低候选<code>head entity</code>的数量。</p>
