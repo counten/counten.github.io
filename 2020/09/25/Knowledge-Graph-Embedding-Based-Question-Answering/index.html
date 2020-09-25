@@ -174,7 +174,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>百度团队发表在WSDM19年的<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3289600.3290956">文章</a>。通过谓词划分数据集，使得训练集合测试集之间没有关联，用以验证模型泛化能力。分别验证每部分损失函数的作用。实体数量较多，直接用预测的实体去匹配复杂度高，通过识别实体名称，缩小候选实体范围。<br><code>KG embedding</code>将知识图谱表示成低维向量，使得在学习的向量中知识图谱原有的结构和关系得到保留。</p>
+    <section class="markdown-content"><p>百度团队发表在WSDM19年的<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3289600.3290956">文章</a>，<a target="_blank" rel="noopener" href="https://github.com/xhuang31/KEQA_WSDM19">源码</a>，<a target="_blank" rel="noopener" href="https://github.com/wbq813/KEQA_WSDM19">备用地址</a>。通过谓词划分数据集，使得训练集合测试集之间没有关联，用以验证模型泛化能力。分别验证每部分损失函数的作用。实体数量较多，直接用预测的实体去匹配复杂度高，通过识别实体名称，缩小候选实体范围。<br><code>KG embedding</code>将知识图谱表示成低维向量，使得在学习的向量中知识图谱原有的结构和关系得到保留。</p>
 <h2 id="1-思想"><a href="#1-思想" class="headerlink" title="1. 思想"></a>1. 思想</h2><p><img src="keqa.png" alt="keqa"></p>
 <ul>
 <li>输入<br>  知识图谱$G$，带有答案、谓词标注、(谓词对应embedding向量)、实体标注、头实体标注、(头实体对应embedding向量) 的问题集$Q$</li>
