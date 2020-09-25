@@ -213,8 +213,11 @@
 训练数据为问题$Q$和对应的实体名称标注。
 下层的`BiLSTEM`与前面一致，通过全连接层后接入`SoftMax`得到的结果$v_j \epsilon R^{2 \times 1}$ ，$v_j$的两个值分别表示`token j`是实体名称的概率和不是实体名称的概率。
 
-<p>需要注意，候选实体可能只是真正实体的一部分，因此包含这些实体名称的都作为候选<code>head entity</code></p>
-<h3 id="1-4-Join-Search-On-Embedding-Spaces"><a href="#1-4-Join-Search-On-Embedding-Spaces" class="headerlink" title="1.4 Join Search On Embedding Spaces"></a>1.4 Join Search On Embedding Spaces</h3><h2 id="2-实验"><a href="#2-实验" class="headerlink" title="2. 实验"></a>2. 实验</h2><h2 id="0-个人感悟"><a href="#0-个人感悟" class="headerlink" title="0. 个人感悟"></a>0. 个人感悟</h2><p>实习回来，浮躁了一段时间，是时候静下心来准备毕业论文了，非常惭愧，读研两年了，静下心看论文的情况并不多。在《极客时间》的《卖桃者说》听到一个观点，有输出的学习才会更加有效，认真输出的内容会得到反馈，反馈能够促使自己更加热爱学习。所谓的正向循环就是如此，不过就是利用邪恶的多巴胺。自己在这方面确实有所欠缺，半年前听到实验室大佬谈论<strong>正向循环</strong>，自己也尝试调整自己，寻找自己的正向循环，但疲于奔命，不了了之。重新整理了一下博客，支持公式输入，望借此构成自己阅读论文的正向循环，重新起航。</p>
+<p>需要注意，候选实体可能只是真正实体的一部分，因此包含这些实体名称的都作为候选<code>head entity</code>，<code>head entity</code>属于候选<code>head entity</code>的三元组是候选三元组$C$，这就缩小了直接用$\hat{e}_h$去比较的复杂度。</p>
+<h3 id="1-4-Join-Search-On-Embedding-Spaces"><a href="#1-4-Join-Search-On-Embedding-Spaces" class="headerlink" title="1.4 Join Search On Embedding Spaces"></a>1.4 Join Search On Embedding Spaces</h3><p>前面的步骤能够得到一个问题的<code>predicate</code>和<code>head entity</code>的表示 $\hat{p}_l$和$\hat{e}_h$，以及候选的<code>head entity</code>。还需要从$G$中找出最符合$\hat{p}_l$和$\hat{e}_h$的三元组，也就是从候选三元组$C$中寻找。通过如下公式表示一个候选三元组$(h,l,t)$与$(\hat{p}_l, \hat{e}_h)$的距离：<br>$$||p_l-\hat{p}_l||_2+\beta_1||e_h-\hat{e}_h||_2+\beta_2||f(e_h, P_l)-\hat{e}_t||_2$$</p>
+<p>$$-\beta_3sim[n(h),HED_{entity}]-\beta_4sim[n(l),HED_{non}]$$<br>前半段表示三元组和预测结果在<code>embedding</code>空间的距离，这里使用$f(e_h, P_l)$表示$e_t$，因为$G$中可能存在$e_h, P_l$相同，但是$e_t$不同的情况。另外$\hat{e}_t$也是通过$f(.)$计算得到的。</p>
+<p>第二段表示，我们倾向于选择<code>head</code>与$HED_{entity}$一致，<code>predicate</code>被问题提及的三元组。</p>
+<h2 id="2-实验"><a href="#2-实验" class="headerlink" title="2. 实验"></a>2. 实验</h2><h2 id="0-个人感悟"><a href="#0-个人感悟" class="headerlink" title="0. 个人感悟"></a>0. 个人感悟</h2><p>实习回来，浮躁了一段时间，是时候静下心来准备毕业论文了，非常惭愧，读研两年了，静下心看论文的情况并不多。在《极客时间》的《卖桃者说》听到一个观点，有输出的学习才会更加有效，认真输出的内容会得到反馈，反馈能够促使自己更加热爱学习。所谓的正向循环就是如此，不过就是利用邪恶的多巴胺。自己在这方面确实有所欠缺，半年前听到实验室大佬谈论<strong>正向循环</strong>，自己也尝试调整自己，寻找自己的正向循环，但疲于奔命，不了了之。重新整理了一下博客，支持公式输入，望借此构成自己阅读论文的正向循环，重新起航。</p>
 </section>
     <!-- Tags START -->
     
