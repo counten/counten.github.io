@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="wbq813&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" type="image/ico" href="/css/images/logo.png"/>
+  
+  <title>
+    
+      《第一行代码android》第7-9章 | 知芯
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitalk.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitalk.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>知芯</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/links/" class="item-link">Links</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/links/" class="menu-link">Links</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>《第一行代码android》第7-9章</h2>
+  <p class="post-date">2020-09-27</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="7-跨程序共享数据"><a href="#7-跨程序共享数据" class="headerlink" title="7. 跨程序共享数据"></a>7. 跨程序共享数据</h2><h3 id="7-1-运行时权限"><a href="#7-1-运行时权限" class="headerlink" title="7.1 运行时权限"></a>7.1 运行时权限</h3><p><code>Android</code> 6及其之前就是通过在<code>AndroidManifest.xml</code>中声明需要使用的权限，用户认可就安装程序。存在的问题是可能少数权限用户不同意，直接就不能安装应用。这种方式我理解为是静态的权限声明。<br>运行时权限使得用户不用在安装时一次性授权所有权限，而是在使用过程中授权某一项。<code>Android</code>将权限分为普通权限和危险权限，普通权限自动授权，危险权限才需要用户同意。用户同意授权是以<strong>权限组</strong>为单位的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ContextCompat.checkSelfPermission())&#123;</span><br><span class="line">    ActivityCompat.requestPermissions()</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    dangerOperation();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现逻辑就是，危险操作之前检测是否有权限，没有则发起申请，申请回调函数中判断用户是否同意，没同意就提醒。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(grantResults[<span class="number">0</span>]==PERMISSION_GRANTED)&#123;</span><br><span class="line">        dangerOperation();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        toast();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-Content-Resolver"><a href="#7-2-Content-Resolver" class="headerlink" title="7.2 Content Resolver"></a>7.2 Content Resolver</h3><p>访问其他应用提供的数据，比如联系人信息，通过<code>Uri</code>访问，<code>Uri</code>具有特定格式：<strong>协议+authority+path</strong>，比如下面的<code>com.example.app.provider</code>是<code>authroity</code>部分。<br>然后通过<code>Context</code>的方法<code>getContentResolver</code>进行访问。后续操作就和直接在内容提供方封装方式类似了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(<span class="string">&quot;content://com.example.app.provider/table1&quot;</span>);</span><br><span class="line">Cursor cursor = getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);</span><br></pre></td></tr></table></figure>
+<h3 id="7-3-Content-Provider"><a href="#7-3-Content-Provider" class="headerlink" title="7.3 Content Provider"></a>7.3 Content Provider</h3><p>与前面的文件存储和<code>sharedPreferences</code>不同的是，<code>Content Provider</code>可以选择对哪一部分数据进行共享。通过继承<code>ContentProvider</code>并实现定义的<code>CRUD</code>，在对应的函数中通过正则识别出<code>path</code>部分，即操作对象，然后按照参数进行数据操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span></span>&#123;</span><br><span class="line">    onCreate();</span><br><span class="line">    CRUD();</span><br><span class="line">    getType();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>getType()</code>返回<code>Uri</code>对应的<code>MIME</code>类型，格式为:<code>vnd.&lt;authority&gt;.&lt;path&gt;</code>，以路径结尾则表示为<code>dir</code>，以<code>id</code>结尾则表示为<code>item</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">content:&#x2F;&#x2F;com.example.app.provider&#x2F;table1</span><br><span class="line"># MIME： vnd.android.cursor.dir&#x2F;vnd.com.example.app.provider&#x2F;table1</span><br><span class="line">content:&#x2F;&#x2F;com.example.app.provider&#x2F;table1&#x2F;1</span><br><span class="line"># MIME： vnd.android.cursor.item&#x2F;vnd.com.example.app.provider&#x2F;table1</span><br></pre></td></tr></table></figure>
+<p><code>Contet Resolver</code> 类似浏览器提供统一的访问工具，<code>content provider</code>类似各个服务器接口提供数据访问的入口。测试发现提供者<code>App</code>关闭时也能访问数据，<code>content provider</code>不依赖于<code>App</code>进程。</p>
+<h2 id="8-使用多媒体"><a href="#8-使用多媒体" class="headerlink" title="8. 使用多媒体"></a>8. 使用多媒体</h2><h3 id="8-1-Notification"><a href="#8-1-Notification" class="headerlink" title="8.1 Notification"></a>8.1 Notification</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String id = <span class="string">&quot;my_channel_01&quot;</span>;</span><br><span class="line">NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</span><br><span class="line">NotificationChannel mChannel = <span class="keyword">new</span> NotificationChannel(id, name, NotificationManager.IMPORTANCE_LOW);</span><br><span class="line">manager.createNotificationChannel(mChannel);</span><br><span class="line">Notification notification = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>, id).setSomeProperity().build();</span><br><span class="line">manager.notify(<span class="number">1</span>, notification);</span><br></pre></td></tr></table></figure>
+<p><code>setSomeProperity</code>表示一系列设置属性的方法，用于设置通知的图标、文字、样式等。需要注意，<code>builder</code>携带<code>channelId</code>，在<code>android 8</code>开始通知划分渠道了，并且每个渠道可以设置重要程度，重要程度越高提醒越强，需要谨慎使用。</p>
+<h3 id="8-2-摄像头和相册"><a href="#8-2-摄像头和相册" class="headerlink" title="8.2 摄像头和相册"></a>8.2 摄像头和相册</h3><h4 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h4><p>首先在应用特有缓存目录下创建文件，并获取文件路径（<code>android7</code>开始需要通过<code>FileProvider</code>访问，并且在<code>AndroidManifest.xml</code>中声明），然后使用相机拍摄并指定保存路径。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">File outputImage = <span class="keyword">new</span> File(getExternalCacheDir(), <span class="string">&quot;output_image.jpg&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;=<span class="number">24</span>)&#123;</span><br><span class="line">    imageUri = FileProvider.getUriForFile(MainActivity.<span class="keyword">this</span>, <span class="string">&quot;cn.codeyourlife.cameraalbum.fileprovider&quot;</span>, outputImage);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123; <span class="comment">// android 7 开始不能直接使用本地真实路径</span></span><br><span class="line">    imageUri = Uri.fromFile(outputImage);</span><br><span class="line">&#125;</span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">&quot;android.media.action.IMAGE_CAPTURE&quot;</span>);</span><br><span class="line">intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);</span><br><span class="line">startActivityForResult(intent, TAKE_PHOTO);</span><br></pre></td></tr></table></figure>
+<h4 id="从相册选择"><a href="#从相册选择" class="headerlink" title="从相册选择"></a>从相册选择</h4><p>从相册选择就跨应用访问了数据，遵循前面运行时权限的请求过程，因此重点在于选中图片之后的回调函数，<code>android 4.4(19)</code> 开始返回图片不再是真实的<code>Uri</code>，因此需要解析。<br>另外，从<code>android 10(29)</code>开始，采用<code>scope storage</code>，在这之前只要有权限就可以直接读写，现在访问其他应用的媒体文件，需要通过<code>ContentResolver()</code>的方法进行加载操作:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));</span><br><span class="line">imageView.setImageBitmap(bitmap);</span><br></pre></td></tr></table></figure>
+<p>或者在<code>android 10</code>中使用<code>requestLegacyExternalStorage</code>来暂时禁用分区存储。</p>
+<h3 id="8-3-播放音频视频"><a href="#8-3-播放音频视频" class="headerlink" title="8.3 播放音频视频"></a>8.3 播放音频视频</h3><p>使用<code>MediaPlayer</code>类播放音频，需要熟悉常用的控制方法，依然是申请运行时权限获取文件路径，然后设置给<code>mediaplayer</code>，从<code>android 10(29)</code>开始，依然需要遵循<code>scope storage</code>。<br>使用<code>VideoView</code>类播放视频，注意项和播放音频类似。</p>
+<h2 id="9-网络技术"><a href="#9-网络技术" class="headerlink" title="9. 网络技术"></a>9. 网络技术</h2><p><code>WebView</code>的使用较为简单，不过从<code>Android 9</code>开始默认不支持<code>cleartext</code>，也就是<code>http</code>协议，改用<code>https</code>或者在<code>AndroidManifest</code>中指定<code>usecleartextTraffix</code>。<br>通过<code>HttpURLConnection</code>发送请求时，通过创建线程发送，但是响应结果时如果需要更新UI，不允许直接在子线程更新，可使用<code>runOnUIThread()</code>进行。使用<code>OkHttp</code>网络库来进行请求更加容易。发送网络请求依然从<code>Android 9</code>开始默认不支持<code>cleartext</code>。<br>另外解析<code>xml</code>和<code>json</code>，<code>SAX</code>和<code>Pull</code>两种解析<code>xml</code>方式，前者类似面向流程；后者面向对象，抽象出一个<code>Handler</code>符合<code>template-method</code>。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#android" >
+    <span class="tag-code">android</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/09/26/%E9%98%85%E8%AF%BB-%E6%B2%89%E9%BB%98%E4%B9%9F%E4%BC%9A%E6%AD%8C%E5%94%B1/">
+        <span class="nav-arrow">← </span>
+        
+          阅读-《沉默也会歌唱》
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <!-- <div id="comments"></div> -->
+      <div id="gitalk-container"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#7-%E8%B7%A8%E7%A8%8B%E5%BA%8F%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE"><span class="toc-nav-text">7. 跨程序共享数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-1-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9D%83%E9%99%90"><span class="toc-nav-text">7.1 运行时权限</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-2-Content-Resolver"><span class="toc-nav-text">7.2 Content Resolver</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-3-Content-Provider"><span class="toc-nav-text">7.3 Content Provider</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#8-%E4%BD%BF%E7%94%A8%E5%A4%9A%E5%AA%92%E4%BD%93"><span class="toc-nav-text">8. 使用多媒体</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-1-Notification"><span class="toc-nav-text">8.1 Notification</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-2-%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E7%9B%B8%E5%86%8C"><span class="toc-nav-text">8.2 摄像头和相册</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%8B%8D%E7%85%A7"><span class="toc-nav-text">拍照</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BB%8E%E7%9B%B8%E5%86%8C%E9%80%89%E6%8B%A9"><span class="toc-nav-text">从相册选择</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-3-%E6%92%AD%E6%94%BE%E9%9F%B3%E9%A2%91%E8%A7%86%E9%A2%91"><span class="toc-nav-text">8.3 播放音频视频</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#9-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF"><span class="toc-nav-text">9. 网络技术</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://codeyourlife.cn/2020/09/27/first-line-android-code-789/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "wbq813";
+    if (gitmentConfig !== 'undefined') {
+      // var gitment = new Gitment({
+      //   id: "《第一行代码android》第7-9章",
+      //   owner: "wbq813",
+      //   repo: "wbq813.github.io",
+      //   oauth: {
+      //     client_id: "ceb721601c4da2d6b245",
+      //     client_secret: "b8adcfeb9c822281b434e5e9116adb3a852473f7"
+      //   },
+      //   theme: {
+      //     render(state, instance) {
+      //       const container = document.createElement('div')
+      //       container.lang = "en-US"
+      //       container.className = 'gitment-container gitment-root-container'
+      //       container.appendChild(instance.renderHeader(state, instance))
+      //       container.appendChild(instance.renderEditor(state, instance))
+      //       container.appendChild(instance.renderComments(state, instance))
+      //       container.appendChild(instance.renderFooter(state, instance))
+      //       return container;
+      //     }
+      //   }
+      // })
+      // gitment.render(document.getElementById('comments'))
+
+      const gitalk = new Gitalk({
+        clientID: "ceb721601c4da2d6b245",
+        clientSecret: "b8adcfeb9c822281b434e5e9116adb3a852473f7",
+        repo: "wbq813.github.io",      // The repository of store comments,
+        owner: "wbq813",
+        admin: ['wbq813'],
+        id: "《第一行代码android》第7-9章",      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2014-2020 知芯 | <a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备19028913号</a>
+    <br>
+    Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '662f6fea89ec7be261fab4b5a14776e2';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
