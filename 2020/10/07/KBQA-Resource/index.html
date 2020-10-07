@@ -166,7 +166,7 @@
 
     <div id="article-banner">
   <h2>KBQA-Resource</h2>
-  <p class="post-date">2020-04-04</p>
+  <p class="post-date">2020-10-07</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -175,41 +175,146 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>知识图谱问答相关资源，持续更新，欢迎收藏和提建议。</p>
+<h1 id="KBQA-Resource"><a href="#KBQA-Resource" class="headerlink" title="KBQA Resource"></a>KBQA Resource</h1><p>知识图谱问答：数据集，数据集评分、开源代码，</p>
+<h2 id="1-Simple-Question"><a href="#1-Simple-Question" class="headerlink" title="1. Simple Question"></a>1. Simple Question</h2><table>
+<thead>
+<tr>
+<th>文章</th>
+<th>年份</th>
+<th>WebQ(F1)</th>
+<th>SimpleQ(Acc)</th>
+<th>CompQ</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td>40.8</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2015ACL</td>
+<td>52.5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>2015</td>
+<td>42.2</td>
+<td>63.9</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>2016</td>
+<td>42.6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td>55.6</td>
+<td>59.7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>2018 ACL</td>
+<td>52.7</td>
+<td>–</td>
+<td>42.8</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>2019 NAACL</td>
+<td></td>
+<td>85.44(FB2M)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>2019 WSDM</td>
+<td></td>
+<td>75.4(FB2M)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="http://www.aclweb.org/website/old_anthology/P/P15/P15-1026.pdf">Question Answering over Freebase with Multi-Column Convolutional Neural Networks</a></p>
+<p>在对答案进行向量化的时候，直接将答案的路径（问题主题词到答案实体的路径）和上下文信息（答案实体周围的知识库子图）一起作为答案特征，通过multi-hot的方式对答案进行向量化。这样的形式不利于模型区分答案的特征（仅仅根据答案的multi-hot向量是不好区分哪些是答案的类型，哪些来自答案的上下文，哪些来自问题主题词到答案实体的路径）。</p>
+<p>因此我们可以将问题的特征表示拆解开，用三个向量分别表示答案的三个特征，即<strong>答案路径（Answer Path）</strong>，<strong>答案上下文信息（Answer Context）</strong>，<strong>答案类型（Answer Type）</strong>，对于每一个答案特征向量，都用一个卷积网络去对问题进行特征提取，将提取出的分布式表达和该答案对应特征向量的分布式表达进行点乘</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/semantic-parsing-via-staged-query-graph-generation-question-answering-with-knowledge-base/">Semantic Parsing via Staged Query Graph Generation:Question Answering with Knowledge Base</a></p>
+<p>利用深度学习对该语义解析方法进行提升</p>
+<p>受信息抽取和向量建模方法的启发，将语义解析过程转化成查询图（Query graph）分阶段生成的过程，使用了卷积神经网络来提升自然语言到知识库关系的映射。传统的语义解析方法和知识库本身的联系是<strong>不够紧密</strong></p>
+<p>查询图：</p>
+<p>步骤：确定主题词，确定核心推导链，是否增加约束和聚合</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.02075">Large-scale Simple Question Answering with Memory Networks</a></p>
+<p>介绍如何将记忆网络应用于KB-QA</p>
+<p>其整体思想是<strong>将知识库里的知识存储到记忆模块M中</strong>，<strong>问题经过输入模块I转化为分布式表达</strong>，<strong>输出模块O选择与问题最相关的支撑记忆（由于SimpleQustions的问题只依赖一个知识，所以只需要选择一条记忆），回答模块R将该记忆对应三元组的宾语作为最终答案输出</strong>。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.00979">Question Answering over Knowledge Base with Neural Attention Combining Global Knowledge Information</a></p>
+<p>根据问题确定主题词，根据主题词确定候选答案，通过候选答案和问题的分布式表达相似度得分确定最终答案。而方法的核心在于学习问题和候选答案的分布式表达。</p>
+<p>对于不同的答案，我们关注问题的焦点是不同的，我们根据候选答案的信息，来引入注意力机制，对同一个问题提取出不同的分布式表达。</p>
+<p>比如 对于问题 <em>“who is the president of France?”<em>，其中之一的答案是实体</em>“Francois Holland”</em>，我们通过知识库可以知道<em>Francois</em> <em>Holland</em> 是一个总统，因此我们会更加关注问句中的 <em>“president”</em> 和 <em>“France”</em> 单词，而根据<em>Francois</em> <em>Holland</em>的类型person，我们会更关注问句中的疑问词<em>who</em>。</p>
+</li>
+<li><p>[Question Answering over Knowledge Base using Factual Memory Networks](../Releated Paper/Question Answering over Knowledge Base using Factual Memory Networks.pdf)</p>
+<p>WebQuestin F1 <strong>55.6</strong> </p>
+<p>simpleQuestion Acc 59.7</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/D18-1242.pdf">Knowledge Base Question Answering via Encoding of Complex Query Graphs</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1902.09087.pdf">Lattice CNNs for Matching Based Chinese Question Answering</a></p>
+<p>匹配用户问题这种短文本，通常面临相同语义的单词和表达方式不唯一的挑战。 中文这种还需要额外分词的语言中，这种现象尤为严重。提出一个基于Lattice CNN的模型，利用在单词语义中多粒度的信息来更好地处理中文问答的匹配。在基于文本问答和知识库问答的实验中，实验结果表明提出的模型可以显著超过目前最好的匹配模型。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/8bc3/3f2d6bb9e6100b720e09c44e6c3ebee5614f.pdf?_ga=2.213130196.1139564236.1571666084-1338815220.1571666084"><strong>Enhancing Key-Value Memory Neural Networks for Knowledge Based Question Answering</strong></a></p>
+</li>
+</ol>
+<ol start="9">
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1029.pdf">Simple Question Answering with Subgraph Ranking and Joint-Scoring</a></p>
+<p>文章提出一个统一的框架定义知识图谱问答中的简单问答：子图选择，和事实选择；子图选择对应实体识别、实体链接，事实选择对应候选实体关系和主语关系的匹配。基于此发现一些问题，并分别进行优化：</p>
 <ul>
-<li>:star: 表示阅读过；</li>
-<li>:heart: 表示有源代码;</li>
+<li><p>不精确的匹配和子图中的实体没有按照与mention的相关性排序</p>
+<p>结合字面相关性(最长公共子序列)和语义相关性(共现概率)提高子图选择的召回率；</p>
+</li>
+<li><p>没有应用主语提及和模式关系之间的依赖</p>
+<p>大多数方式没有考虑主语-提及、关系-句式两个匹配的贡献程度；</p>
+</li>
+<li><p>最小排序损失是次优的</p>
+<p>现有损失函数的计算丢失了匹配分数之间的相对顺序。</p>
+<p>通过一个带有考虑顺的损失函数的联合评分CNN进行事实选择。</p>
+</li>
 </ul>
-<h2 id="1-Papers"><a href="#1-Papers" class="headerlink" title="1. Papers"></a>1. Papers</h2><h3 id="1-1-Survey-of-KGQA"><a href="#1-1-Survey-of-KGQA" class="headerlink" title="1.1 Survey of KGQA"></a>1.1 Survey of KGQA</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1907.09361.pdf"><strong>(2019.7)Introduction to Neural Network based Approaches for Question Answering over Knowledge Graphs</strong></a></li>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1031.pdf">UHop: An Unrestricted-Hop Relation Extraction Framework for Knowledge-Based Question Answering</a></p>
+</li>
+<li><p><strong>Knowledge Graph Embedding Based Question Answering</strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3289600.3290956">Paper</a></p>
+</li>
+<li><p><a href="http://codeyourlife.cn/2020/09/25/Knowledge-Graph-Embedding-Based-Question-Answering/">阅读记录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/xhuang31/KEQA_WSDM19">开源代码</a></p>
+<p>开源代码未提供知识图谱embedding部分<a target="_blank" rel="noopener" href="https://github.com/xhuang31/KEQA_WSDM19/issues/5">issue</a></p>
+</li>
+</ul>
+</li>
 </ol>
-<h3 id="1-2-Methods-based-on-text-matching"><a href="#1-2-Methods-based-on-text-matching" class="headerlink" title="1.2 Methods based on text matching"></a>1.2 Methods based on text matching</h3><ol>
-<li><strong>CIKM 2015</strong>-<a target="_blank" rel="noopener" href="https://dl_acm.gg363.site/citation.cfm?id=2806472">More Accurate Question Answering on Freebase</a><a target="_blank" rel="noopener" href="https://github.com/ad-freiburg/aqqu">[code]</a></li>
-<li><strong>NAACL 2016</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N16-2016.pdf">Question Answering over Knowledge Base using Factual Memory Networks</a></li>
-<li><strong>COLING 2016</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/C16-1164.pdf">Simple Question Answering by Attentive Convolutional Neural Network</a></li>
-<li><strong>ACL 2017</strong>-<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1704.06194.pdf"><strong>Improved Neural Relation Detection for Knowledge Base Question Answering</strong></a></li>
-<li><strong>ACL 2017</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/P17-1021.pdf"><strong>An End-to-End Model for Question Answering over Knowledge Base with Cross-Attention Combining Global Knowledge</strong></a></li>
-<li><strong>EMNLP 2017</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/D17-1307.pdf">No Need to Pay Attention: Simple Recurrent Neural Networks Work!for Answering “Simple” Questions</a></li>
-<li><strong>WWW 2017</strong>-<a target="_blank" rel="noopener" href="https://dl.acm.org/ft_gateway.cfm?id=3052675&ftid=1864214&dwn=1&CFID=166354814&CFTOKEN=b24a6cc918c31342-57EF028D-FC77-0D58-1C25E6922FA4B332">Neural Network-based Question Answering over Knowledge Graphs on Word and Character Level</a></li>
-<li><strong>CIKM 2018</strong>-<a target="_blank" rel="noopener" href="http://delivery.acm.org/10.1145/3270000/3269247/p1807-jia.pdf?ip=115.156.143.194&id=3269247&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E.CC932049E1B2BA72.4D4702B0C3E38B35.4D4702B0C3E38B35&__acm__=1571764883_9ca01be59f27ce4ffe75ce596fd2f9eb">TEQUILA: Temporal Question Answering over Knowledge Bases</a></li>
-<li><strong>ISWC 2018</strong>-<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1801.03825.pdf">EARL: Joint Entity and Relation Linking for Question Answering over Knowledge Graphs</a></li>
-<li><strong>NAACL 2018</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N18-2047.pdf">Strong Baselines for Simple Question Answering over Knowledge Graphs with and without Neural Networks </a><a target="_blank" rel="noopener" href="https://github.com/castorini/BuboQA">[code]</a></li>
-<li><strong>EMNLP 2018</strong>-<a target="_blank" rel="noopener" href="http://aclweb.org/anthology/D18-1051">SimpleQuestions Nearly Solved: A New Upperbound and Baseline Approach </a><a target="_blank" rel="noopener" href="https://github.com/PetrochukM/Simple-QA-EMNLP-2018">[code]</a></li>
-<li><strong>EMNLP 2018</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W18-5504.pdf">Retrieve and Re-rank: A Simple and Effective IR Approach to Simple Question Answering over Knowledge Graphs</a></li>
-<li>)​ <strong>ACL 2018</strong>-<a target="_blank" rel="noopener" href="https://arxiv.gg363.site/vc/arxiv/papers/1804/1804.03317v2.pdf"><strong>Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN</strong> </a><a target="_blank" rel="noopener" href="https://github.com/quyingqi/kbqa-ar-smcnn">[code]</a></li>
-<li><strong>EMNLP 2018</strong>-<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1809.00782.pdf">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a><a target="_blank" rel="noopener" href="https://github.com/OceanskySun/GraftNet">[code]</a></li>
-<li><strong>COLING 2018</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/C18-1277.pdf">Pattern-revising Enhanced Simple Question Answering over Knowledge Bases</a></li>
-<li><strong>COLING 2018</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/C18-1171.pdf">An Interpretable Reasoning Network for Multi-Relation Question Answering</a><a target="_blank" rel="noopener" href="https://github.com/zmtkeke/IRN">[code]</a></li>
-<li><strong>ACL 2018</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W18-3205.pdf">Transliteration Better than Translation? Answering Code-mixed Questions over a Knowledge Base</a></li>
-<li>:star:<a target="_blank" rel="noopener" href="https://github.com/hugochan/BAMnet">:heart:</a> <strong>NAACL 2019</strong>-<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1903.02188.pdf"><strong>Bidirectional Attentive Memory Networks for Question Answering over Knowledge Bases</strong></a></li>
-<li>:star:<a target="_blank" rel="noopener" href="https://github.com/Erutan-pku/LCN-for-Chinese-QA">:heart:</a> <strong>AAAI 2019</strong>-<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1902.09087.pdf">Lattice CNNs for Matching Based Chinese Question Answering</a></li>
-<li><strong>NAACL 2019</strong>-<a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/8bc3/3f2d6bb9e6100b720e09c44e6c3ebee5614f.pdf?_ga=2.213130196.1139564236.1571666084-1338815220.1571666084"><strong>Enhancing Key-Value Memory Neural Networks for Knowledge Based Question Answering</strong></a></li>
-<li>:star: <strong>NAACL 2019</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1029.pdf">Simple Question Answering with Subgraph Ranking and Joint-Scoring</a></li>
-<li><strong>NAACL 2019</strong>-<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1031.pdf">UHop: An Unrestricted-Hop Relation Extraction Framework for Knowledge-Based Question Answering</a></li>
-</ol>
-<h3 id="1-3-Methods-based-on-semantic-parsing"><a href="#1-3-Methods-based-on-semantic-parsing" class="headerlink" title="1.3 Methods based on semantic parsing"></a>1.3 Methods based on semantic parsing</h3><ol>
-<li>**</li>
-</ol>
-</section>
+<h2 id="2-Complex-Question"><a href="#2-Complex-Question" class="headerlink" title="2. Complex Question"></a>2. Complex Question</h2></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -227,20 +332,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/12/25/DesignPattern-Strategy/">
+      <a class="nav-left" href="/2020/10/04/first-line-android-code-10/">
         <span class="nav-arrow">← </span>
         
-          DesignPattern-Strategy
+          《第一行代码android》第10章
         
       </a>
     
-    
-      <a class="nav-right" href="/2020/04/21/k8s-with-kubeadm/">
-        
-          k8s-with-kubeadm
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -287,7 +385,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Papers"><span class="toc-nav-text">1. Papers</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1-Survey-of-KGQA"><span class="toc-nav-text">1.1 Survey of KGQA</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2-Methods-based-on-text-matching"><span class="toc-nav-text">1.2 Methods based on text matching</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-3-Methods-based-on-semantic-parsing"><span class="toc-nav-text">1.3 Methods based on semantic parsing</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#KBQA-Resource"><span class="toc-nav-text">KBQA Resource</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Simple-Question"><span class="toc-nav-text">1. Simple Question</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Complex-Question"><span class="toc-nav-text">2. Complex Question</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -297,7 +395,7 @@
 
 <script>
   (function () {
-    var url = 'http://codeyourlife.cn/2020/04/04/KBQA-Resource/';
+    var url = 'http://codeyourlife.cn/2020/10/07/KBQA-Resource/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
