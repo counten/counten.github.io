@@ -254,41 +254,56 @@
 <ol>
 <li><p>Question Answering over Freebase with Multi-Column Convolutional Neural Networks</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://www.aclweb.org/website/old_anthology/P/P15/P15-1026.pdf">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.aclweb.org/website/old_anthology/P/P15/P15-1026.pdf">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>在对答案进行向量化的时候，直接将答案的路径（问题主题词到答案实体的路径）和上下文信息（答案实体周围的知识库子图）一起作为答案特征，通过multi-hot的方式对答案进行向量化。这样的形式不利于模型区分答案的特征（仅仅根据答案的multi-hot向量是不好区分哪些是答案的类型，哪些来自答案的上下文，哪些来自问题主题词到答案实体的路径）。</p>
 <p>因此我们可以将问题的特征表示拆解开，用三个向量分别表示答案的三个特征，即<strong>答案路径（Answer Path）</strong>，<strong>答案上下文信息（Answer Context）</strong>，<strong>答案类型（Answer Type）</strong>，对于每一个答案特征向量，都用一个卷积网络去对问题进行特征提取，将提取出的分布式表达和该答案对应特征向量的分布式表达进行点乘</p>
 </li>
+</ul>
+</li>
 <li><p>Semantic Parsing via Staged Query Graph Generation:Question Answering with Knowledge Base</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/semantic-parsing-via-staged-query-graph-generation-question-answering-with-knowledge-base/">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/semantic-parsing-via-staged-query-graph-generation-question-answering-with-knowledge-base/">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>利用深度学习对该语义解析方法进行提升</p>
 <p>受信息抽取和向量建模方法的启发，将语义解析过程转化成查询图（Query graph）分阶段生成的过程，使用了卷积神经网络来提升自然语言到知识库关系的映射。传统的语义解析方法和知识库本身的联系是<strong>不够紧密</strong></p>
 <p>查询图：</p>
 <p>步骤：确定主题词，确定核心推导链，是否增加约束和聚合</p>
 </li>
+</ul>
+</li>
 <li><p>Large-scale Simple Question Answering with Memory Networks</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.02075">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.02075">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>介绍如何将记忆网络应用于KB-QA</p>
 <p>其整体思想是<strong>将知识库里的知识存储到记忆模块M中</strong>，<strong>问题经过输入模块I转化为分布式表达</strong>，<strong>输出模块O选择与问题最相关的支撑记忆（由于SimpleQustions的问题只依赖一个知识，所以只需要选择一条记忆），回答模块R将该记忆对应三元组的宾语作为最终答案输出</strong>。</p>
 </li>
+</ul>
+</li>
 <li><p>Question Answering over Knowledge Base with Neural Attention Combining Global Knowledge Information</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.00979">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.00979">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>根据问题确定主题词，根据主题词确定候选答案，通过候选答案和问题的分布式表达相似度得分确定最终答案。而方法的核心在于学习问题和候选答案的分布式表达。</p>
 <p>对于不同的答案，我们关注问题的焦点是不同的，我们根据候选答案的信息，来引入注意力机制，对同一个问题提取出不同的分布式表达。</p>
 <p>比如 对于问题 <em>“who is the president of France?”<em>，其中之一的答案是实体</em>“Francois Holland”</em>，我们通过知识库可以知道<em>Francois</em> <em>Holland</em> 是一个总统，因此我们会更加关注问句中的 <em>“president”</em> 和 <em>“France”</em> 单词，而根据<em>Francois</em> <em>Holland</em>的类型person，我们会更关注问句中的疑问词<em>who</em>。</p>
 </li>
+</ul>
+</li>
 <li><p>Question Answering over Knowledge Base using Factual Memory Networks</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N16-2016.pdf">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N16-2016.pdf">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>WebQuestin F1 <strong>55.6</strong> </p>
 <p>simpleQuestion Acc 59.7</p>
+</li>
+</ul>
 </li>
 <li><p>Knowledge Base Question Answering via Encoding of Complex Query Graphs</p>
 <ul>
@@ -297,9 +312,12 @@
 </li>
 <li><p>Lattice CNNs for Matching Based Chinese Question Answering</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1902.09087.pdf">文章</a></li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1902.09087.pdf">文章</a></p>
+</li>
+<li><p>简要记录</p>
 <p>匹配用户问题这种短文本，通常面临相同语义的单词和表达方式不唯一的挑战。 中文这种还需要额外分词的语言中，这种现象尤为严重。提出一个基于Lattice CNN的模型，利用在单词语义中多粒度的信息来更好地处理中文问答的匹配。在基于文本问答和知识库问答的实验中，实验结果表明提出的模型可以显著超过目前最好的匹配模型。</p>
+</li>
+</ul>
 </li>
 <li><p>Enhancing Key-Value Memory Neural Networks for Knowledge Based Question Answering</p>
 <ul>
@@ -310,9 +328,11 @@
 <ol start="9">
 <li><p><strong>Simple Question Answering with Subgraph Ranking and Joint-Scoring</strong></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1029.pdf">文章</a></li>
-<li>未找到开源代码</li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N19-1029.pdf">文章</a></p>
+</li>
+<li><p>未找到开源代码</p>
+</li>
+<li><p>简要记录</p>
 <p>文章提出一个统一的框架定义知识图谱问答中的简单问答：子图选择，和事实选择；子图选择对应实体识别、实体链接，事实选择对应候选实体关系和主语关系的匹配。基于此发现一些问题，并分别进行优化：</p>
 <ul>
 <li><p>不精确的匹配和子图中的实体没有按照与mention的相关性排序</p>
@@ -324,6 +344,8 @@
 <li><p>最小排序损失是次优的</p>
 <p>现有损失函数的计算丢失了匹配分数之间的相对顺序。</p>
 <p>通过一个带有考虑顺的损失函数的联合评分CNN进行事实选择。</p>
+</li>
+</ul>
 </li>
 </ul>
 </li>
